@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Giriş</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <style>
+
+        #mainDiv {
+            background-image: url('images/background.jpg');
+            width: 100%;
+            min-height: 100vh;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            align-items: center;
+            padding: 15px;
+            background-repeat: no-repeat;
+            background-position: center;
+            background-size: cover;
+            position: relative;
+            z-index: 1;
+
+        }
+
+        #mainDiv::before {
+            content: "";
+            display: block;
+            position: absolute;
+            z-index: -1;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+
+        }
+
+        img {
+            position: absolute;
+            top: -12%;
+            left: 35%;
+        }
+
+        input:hover {
+            border: 1px solid lightskyblue;
+            border-radius: 8px;
+        }
+
+        .form-control {
+            border-radius: 8px;
+        }
+
+        #centerDiv {
+            flex-shrink: 0;
+            border: 3px solid #1c8abd;
+            border-radius: 8px;
+            display: block;
+            margin: 0 auto;
+            flex-direction: column;
+            background: #f0f0f0;
+            max-width: 100%;
+            position: relative;
+            z-index: 2;
+            margin: 135px;
+            height: 650px;
+
+        }
+
+        #password + .glyphicon {
+            cursor: pointer;
+            pointer-events: all;
+        }
+
+        /* Styles for CodePen Demo Only */
+        #wrapper {
+            max-width: 500px;
+            margin: auto;
+
+        }
+    </style>
+</head>
+<body>
+<div id="mainDiv">
+    <div class="col-sm-3">
+        <!--LeftMain Div-->
+
+    </div>
+    <div class="col-sm-6 " style="margin: auto;">
+        <div id="centerDiv">
+            <img src="/images/logo.ico" class="img-responsive" style="height: 150px;width: 150px">
+            <!--Center Div-->
+
+            <div class="row" style="margin-top:25%;margin-bottom: 15px ">
+                <!--Img Div-->
+                <div class="col-sm-4"></div>
+                <div class="col-sm-4">
+                </div>
+                <div class="col-sm-4"></div>
+            </div>
+            <div class="row" id="cenDiv">
+                <!--Login Div-->
+                <div class="col-sm-2"></div>
+                <div class="col-sm-8" style="margin: auto;">
+
+                    <div style="margin: auto; max-width: 200px">
+                        <label style="margin-top: 15px"><b>E-Mail</b></label>
+                        <input style="margin-top: 5px" type="email" class="form-control" id="email"
+                               placeholder="E-Mail">
+                    </div>
+
+                    <div style="margin: auto; max-width: 200px">
+                        <label style="margin-top: 15px"><b>Password</b></label>
+                        <div id="wrapper">
+                            <div class="form-group has-feedback">
+                                <input type="password" class="form-control" id="password" placeholder="Password">
+                                <i class="glyphicon glyphicon-eye-open form-control-feedback"></i>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div style="margin: auto; max-width: 200px">
+                        <button id="login" type="button" class="btn btn-primary btn-lg btn-block"
+                                style="margin-top: 15px;">Login
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <!--Footer Div-->
+                <div class="col-sm-2"></div>
+            </div>
+        </div>
+    </div>
+    <div class="col-sm-3">
+        <!--RightMain Div-->
+    </div>
+</div>
+
+
+<script>
+    $(document).ready(function () {
+        $("#login").click(function () {
+            var userLogin = {
+                "email": $("#email").val(),
+                "password": $("#password").val()
+            }
+            $.ajax({
+
+                url: 'http://localhost:8080/loginAPI',
+                contentType: 'application/json',
+                data: JSON.stringify(userLogin),
+                dataType: 'json',
+                processData: false,
+                type: 'POST',
+                success: function (data) {
+                    console.log(data);
+                    console.log("device control succeeded");
+
+
+                },
+                error: function () {
+                    console.log("device control failed");
+                }
+
+
+            });
+        });
+    });
+        $('#password + .glyphicon').on('click', function () {
+            var x = document.getElementById("password");
+            if (x.type === "password") {
+                $(this).toggleClass('glyphicon-eye-close').toggleClass('glyphicon-eye-open');
+                x.type = "text";
+            }
+            else {
+                $(this).toggleClass('glyphicon-eye-close').toggleClass('glyphicon-eye-open');
+                x.type = "password";
+            }
+        });
+</script>
+</body>
+</html>
