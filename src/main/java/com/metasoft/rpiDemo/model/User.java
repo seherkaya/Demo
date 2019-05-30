@@ -9,9 +9,9 @@ import javax.persistence.*;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
 import java.sql.Blob;
+import java.sql.Date;
 import java.util.List;
 import java.util.Set;
-
 @Data
 @Builder
 @AllArgsConstructor
@@ -38,7 +38,7 @@ public class User {
     private String password;
 
     @Column(name = "user_birth_date")
-    private String birthDate;
+    private Date birthDate;
 
     @Column(name = "user_tc")
     private Integer tc;
@@ -53,8 +53,8 @@ public class User {
     @JoinTable(name = "user_role", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "role_id"))
     private Set<Role> roles;
 
-    @OneToMany(cascade = CascadeType.ALL,
-    orphanRemoval = true)
+    @ManyToMany(cascade = CascadeType.ALL)
+    @JoinTable(name = "user_environment", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "environtment_id"))
     private Set<Environment> environment;
 
     public Integer getId() {
@@ -87,9 +87,13 @@ public class User {
 
     public void setPassword(String password) { this.password = password;}
 
-    public String getBirthDate() { return birthDate; }
+    public Date getBirthDate() {
+        return birthDate;
+    }
 
-    public void setBirthDate(String birthDate) { this.birthDate = birthDate; }
+    public void setBirthDate(Date birthDate) {
+        this.birthDate = birthDate;
+    }
 
     public Integer getTc() { return tc; }
 
