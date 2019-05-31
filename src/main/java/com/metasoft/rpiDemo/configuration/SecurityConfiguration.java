@@ -24,9 +24,10 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 authorizeRequests()
                 .antMatchers( "/" ).permitAll()
                 .antMatchers( "/login" ).permitAll()
-                .antMatchers( "/denemeAPI" ).permitAll()
                 .antMatchers( "/loginAPI" ).permitAll()
                 //.antMatchers( "/admin/home" ).permitAll()
+
+                .antMatchers( "admin/home" ).hasAnyAuthority("ADMIN")
                 .antMatchers( "/admin/**" ).hasAuthority( "ADMIN" ).anyRequest()
                 .authenticated().and().csrf().disable().formLogin()
                 .loginPage("/giris").failureUrl("/giris?error=true")

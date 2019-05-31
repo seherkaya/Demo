@@ -156,6 +156,11 @@
                 type: 'POST',
                 success: function (data) {
                     console.log(data);
+                    if(data.successful== true)
+                    {
+                        window.location.href = "http://localhost:8080/admin/home";
+
+                    }
                     console.log("device control succeeded");
 
 

@@ -12,6 +12,7 @@ import java.sql.Blob;
 import java.sql.Date;
 import java.util.List;
 import java.util.Set;
+
 @Data
 @Builder
 @AllArgsConstructor
@@ -37,8 +38,8 @@ public class User {
     @Column(name = "user_password")
     private String password;
 
-    @Column(name = "user_birth_date")
-    private Date birthDate;
+//    @Column(name = "user_birth_date")
+//    private Date birthDate;
 
     @Column(name = "user_tc")
     private Integer tc;
@@ -46,15 +47,12 @@ public class User {
     @Column(name = "active")
     private Integer active;
 
-    @Column(name = "user_img")
-    private Blob userImg;
-
     @ManyToMany(cascade = CascadeType.ALL)
     @JoinTable(name = "user_role", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "role_id"))
     private Set<Role> roles;
 
     @ManyToMany(cascade = CascadeType.ALL)
-    @JoinTable(name = "user_environment", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "environtment_id"))
+    @JoinTable(name = "user_environment", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "environment_id"))
     private Set<Environment> environment;
 
     public Integer getId() {
@@ -87,13 +85,6 @@ public class User {
 
     public void setPassword(String password) { this.password = password;}
 
-    public Date getBirthDate() {
-        return birthDate;
-    }
-
-    public void setBirthDate(Date birthDate) {
-        this.birthDate = birthDate;
-    }
 
     public Integer getTc() { return tc; }
 
@@ -103,9 +94,6 @@ public class User {
 
     public void setActive(Integer active) { this.active = active; }
 
-    public Blob getUserImg() { return userImg; }
-
-    public void setUserImg(Blob userImg) { this.userImg = userImg; }
 
     public Set<Role> getRoles() { return roles; }
 

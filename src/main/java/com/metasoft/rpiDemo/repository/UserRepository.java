@@ -4,8 +4,7 @@ import com.metasoft.rpiDemo.model.User;
 import com.metasoft.rpiDemo.model.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 
-public interface UserRepository extends JpaRepository<User,String> {
+public interface UserRepository extends JpaRepository<User,Integer> {
 
-    User findById(Integer id);
-    User findByEmail(String email);
+     User findByEmail(String email);
 }

@@ -44,12 +44,17 @@
 			<artifactId>sqlite-jdbc</artifactId>
 			<version>3.25.2</version>
 		</dependency>
+
+
 		<!-- https://mvnrepository.com/artifact/com.zsoltfabok/sqlite-dialect -->
 		<dependency>
 			<groupId>com.zsoltfabok</groupId>
 			<artifactId>sqlite-dialect</artifactId>
 			<version>1.0</version>
 		</dependency>
+
+
+
 		<dependency>
 			<groupId>org.projectlombok</groupId>
 			<artifactId>lombok</artifactId>
@@ -60,11 +65,15 @@
 			<artifactId>spring-boot-starter-genelIslemler</artifactId>
 			<scope>genelIslemler</scope>
 		</dependency>
+
+
 		<dependency>
 			<groupId>org.springframework.security</groupId>
 			<artifactId>spring-security-genelIslemler</artifactId>
 			<scope>genelIslemler</scope>
 		</dependency>
+
+
 		<dependency>
 			<groupId>com.google.code.gson</groupId>
 			<artifactId>gson</artifactId>

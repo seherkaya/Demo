@@ -32,9 +32,6 @@ public class Environment {
     @Column(name = "environment_ip")
     private String environment_ip;
 
-    @Column(name = "environment_img")
-    private Blob environment_img;
-
     @Column(name = "server_ip")
     private String server_ip;
 
@@ -44,8 +41,6 @@ public class Environment {
     @Column(name = "environment_ack")
     private String environment_ack;
 
-    @Column(name = "user_id")
-    private Integer user_id;
 
     public Integer getId() {
         return id;
@@ -87,14 +82,6 @@ public class Environment {
         this.environment_ip = environment_ip;
     }
 
-    public Blob getEnvironment_img() {
-        return environment_img;
-    }
-
-    public void setEnvironment_img(Blob environment_img) {
-        this.environment_img = environment_img;
-    }
-
     public String getServer_ip() {
         return server_ip;
     }
@@ -117,13 +104,5 @@ public class Environment {
 
     public void setEnvironment_ack(String environment_ack) {
         this.environment_ack = environment_ack;
-    }
-
-    public Integer getUser_id() {
-        return user_id;
-    }
-
-    public void setUser_id(Integer user_id) {
-        this.user_id = user_id;
     }
 }
