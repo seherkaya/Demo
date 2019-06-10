@@ -5,7 +5,7 @@ import org.springframework.data.domain.Page;
 import java.util.LinkedList;
 import java.util.List;
 
-public class CustomPagable {
+public class CustomPageable {
 
     private boolean isFirst;
     private boolean isLast;
@@ -14,7 +14,7 @@ public class CustomPagable {
     private long totalElements;
     private List<Object> list;
 
-    public CustomPagable(Page page) {
+    public CustomPageable(Page page) {
         list = new LinkedList<>(page.getContent());
         totalElements = page.getTotalElements();
         totalPages = page.getTotalPages();

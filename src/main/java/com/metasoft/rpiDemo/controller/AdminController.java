@@ -11,14 +11,13 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 @Controller
 @RequestMapping(value = "/admin")
-
 public class AdminController {
 
     @Autowired
     private UserServiceImpl userServiceImpl;
 
     @RequestMapping(value = "/home", method = RequestMethod.GET)
-    public String registration() {
+    public String home() {
         return "home";
     }
 
@@ -26,8 +25,7 @@ public class AdminController {
     @RequestMapping(value = "/listeAPI", method = RequestMethod.POST)
     public String listeDondur(@RequestParam(required = false, value = "name") String name,
                               @RequestParam( required = true, value = "pageNo") Integer pageNo)
-    {/*if(pageNo== null){pageNo=0;}
-        return new Gson().toJson( userServiceImpl.searchAll( name,pageNo ) );*/
-        return "true";
+    {if(pageNo== null){pageNo=0;}
+        return new Gson().toJson( userServiceImpl.searchAll( name,pageNo ) );
     }
 }

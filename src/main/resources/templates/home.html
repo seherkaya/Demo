@@ -31,6 +31,20 @@
 
     }
 
+    .userList {
+        padding: 0 30px;
+        margin: 0 auto;
+        background-color: white;
+        border: 1px solid #D3D3D3;
+        border-radius: 8px;
+
+    }
+    .forUserInfo{
+
+        margin-top: 10px;
+        margin-bottom: 10px;
+
+    }
     .bs-example {
         margin: 20px;
     }
@@ -239,8 +253,55 @@
             -ms-transform: translateY(0%);
         }
     }
+    .forNameAndAut{
+        padding: 0px;
+    }
+
 </style>
 <body>
+<div class="modal fade" id="editModal" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title"><b>EDIT</b></h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div id="divBodyandButton">
+
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="deleteModal" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button class="close" data-dismiss="modal" type="button">&times;</button>
+                <h4 class="modal-title">DELETE</h4>
+            </div>
+
+            <div class="modal-body" id="deleteModalBody" style="font-size: 16pt;">
+                <h1><b>Are You Sure ?</b></h1>
+                <div class="row">
+                    <div class="col-xs-12" id="userDeleteDiv" style="padding: 5px 15px 5px 15px;">
+                    </div>
+                    <div class="col-xs-0" id="userDeleteDiv1" style="padding: 5px 15px 5px 15px;">
+
+                    </div>
+                </div>
+            </div>
+
+            <div class="modal-footer">
+                <button class="btn btn-danger" data-dismiss="modal" type="button">Kapat</button>
+                <button class="btn btn-warning" data-dismiss="modal" type="button">Kapat</button>
+            </div>
+        </div>
+
+    </div>
+</div>
+
 <div class="bodyDiv">
     <div class="row" id="forNavbar" style="margin:6%; margin-bottom: 0px;">
         <nav class="navbar navbar-expand-lg bg-dark navbar-dark fixed-top">
@@ -297,16 +358,21 @@
                             <span class="fa fa-search form-control-feedback"></span>
                             <input type="text" class="form-control" placeholder="Search">
                         </div>
+                        <!-- Kullanıcı listeler-->
+
                         <div class="bs-example">
                             <nav>
                                 <ul class="pagination justify-content-center">
-                                    <li class="page-item disabled"><span class="page-link">Previous</span></li>
-                                    <li class="page-item active"><a href="#" class="page-link">1</a></li>
+
+                                    <li id="btnPrevPage" class="page-item disabled"><span class="page-link" onclick="previousPage()">Previous</span></li>
+
+                                    <li  class="page-item active"><a href="#" class="page-link">1</a></li>
                                     <li class="page-item"><a href="#" class="page-link">2</a></li>
                                     <li class="page-item"><a href="#" class="page-link">3</a></li>
                                     <li class="page-item"><a href="#" class="page-link">4</a></li>
                                     <li class="page-item"><a href="#" class="page-link">5</a></li>
-                                    <li class="page-item"><a href="#" class="page-link">Next</a></li>
+
+                                    <li id="btnNextPage" class="page-item"><a href="#" class="page-link" onclick="nextPage()">Next</a></li>
                                 </ul>
                             </nav>
                         </div>
@@ -316,8 +382,55 @@
             </div>
             <div class="container">
                 <div class="col-sm-2"></div>
-                <div class="col-sm-8 centerDiv">
+                <div class="col-sm-8 centerDiv2" style="padding: 0px">
                     <!--USER LİSTELEMEK İÇİN -->
+                    <div id ="usersList" class="container usersList" style="width: 100%; padding: 0px;">
+                        <!--<div class="container userList" >
+                            <div class="col-sm-9 forUserInfo">
+                                <div class="container forNameAndAut">
+                                    <div class="col-sm-4">Ahmet Ali</div>
+                                    <div class="col-sm-2" style="background-color: red;color: white;text-align: center">Admin</div>
+                                    <div class="col-sm-6"></div>
+                                </div>
+                                <div class="container forInfo" style="font-size: 10px;font-style: italic">
+                                    <div>152120121043</div>
+                                    <div>+905052258986</div>
+                                </div>
+                                <div class="container keyInfo" >Kartı Yoktur</div>
+                            </div>
+                            <div class="col-sm-3 forButtons">
+                                <div style="margin-top: 10px; margin-bottom: 5px;">
+                                    <button type="button" class="btn btn-primary btn-lg">Düzenle</button>
+                                    <button type="button" class="btn btn-primary btn-lg">Sil</button>
+                                </div >
+                                <div style="margin-top: 10px; margin-bottom: 5px;"><button type="button" class="btn btn-primary btn-lg">Anahtar Yönetimi</button></div>
+
+                            </div>
+                        </div>
+                        <div class="container userList">
+                            <div class="col-sm-9 forUserInfo">
+                                <div class="container forNameAndAut">
+                                    <div class="col-sm-4">Ahmet Ali</div>
+                                    <div class="col-sm-2" style="background-color: red;color: white;text-align: center">Admin</div>
+                                    <div class="col-sm-6"></div>
+                                </div>
+                                <div class="container forInfo" style="font-size: 10px;font-style: italic">
+                                    <div>152120121043</div>
+                                    <div>+905052258986</div>
+                                </div>
+                                <div class="container keyInfo" >Kartı Yoktur</div>
+                            </div>
+                            <div class="col-sm-3 forButtons">
+                                <div style="margin-top: 10px; margin-bottom: 5px;">
+                                    <button type="button" class="btn btn-primary btn-lg">Düzenle</button>
+                                    <button type="button" class="btn btn-primary btn-lg">Sil</button>
+                                </div >
+                                <div style="margin-top: 10px; margin-bottom: 5px;"><button type="button" class="btn btn-primary btn-lg">Anahtar Yönetimi</button></div>
+
+                            </div>
+                        </div>
+-->
+                    </div>
                 </div>
                 <div class="col-sm-2"></div>
             </div>
@@ -338,7 +451,7 @@
                     <div class="main">
                         <div class="form-group has-search">
                             <span class="fa fa-search form-control-feedback"></span>
-                            <input type="text" class="form-control" placeholder="Search">
+                            <input id="inputSearch" type="text" class="form-control" placeholder="Search">
                         </div>
                     </div>
                 </div>
@@ -389,6 +502,198 @@
     </div>
 </div>
 <script>
+    var name = "";
+    var str="";
+    var totalPages;
+    var currentPage;
+
+    var currentList = [];
+    function getPage(page, name) {
+        console.log("getPage:" + page);
+        console.log("getPage:" + name);
+        var api = "http://localhost:8080/admin/listeAPI?pageNo=" + page;
+        if (name != null) {
+            api += "&name=" + name;
+        }
+        $.ajax({
+            url: api,
+            contentType: 'application/json',
+            traditional: true,
+            dataType: 'json',
+            processData: false,
+            type: 'POST',
+            success: function (data) {
+                var status = data.status;
+                str = data.data;
+                if (data.successful == true) {
+                    currentPage = str;
+                    if (currentPage.isFirst) {
+                        $("#btnPrevPage").prop("disabled", "disabled");
+                    }
+                    else {
+                        $("#btnPrevPage").prop("disabled", "");
+                    }
+                    if (currentPage.isLast) {
+                        $("#btnNextPage").prop("disabled", "disabled");
+                    }
+                    else {
+                        $("#btnNextPage").prop("disabled", "");
+                    }
+                    console.log(str);
+                    currentList = str.list;
+                    listing(str);
+                    if (status == 0) {
+                        console.log("device control succeeded");
+                    }
+                }
+            },
+            error: function (data) {
+                console.log("Device control failed" + data);
+            }
+
+        })
+
+    }
+    function listing(str) {
+        var myObject = str.list;
+        var mainContainer = document.getElementById('usersList');
+        var tempDiv = "";
+        var currentQuery = inputSearch.value;
+
+
+
+        for (var i in myObject) {
+            var user = myObject[i];
+            var name = user.name;
+            var surname=user.surname;
+            var role = user.roles[0].role;
+            var tc = user.tc;
+            var email = user.email;
+            var temp = "";
+
+            if (currentQuery != "" && (!name.includes(currentQuery) && !lastName.includes(currentQuery))) {
+
+                continue;
+            }
+
+            temp += '<div class="container userList" >';
+            temp += '<div class="col-sm-8 forUserInfo">';
+            temp += '<div class="container forNameAndAut">';
+            temp += '<div class="col-sm-4">' + name +' '+surname+'</div>';
+            temp += '<div class="col-sm-2" style="background-color: red;color: white;text-align: center">' + role + '</div>';
+            temp += '<div class="col-sm-6"></div> </div>';
+            temp += '<div class="container forInfo" style="font-size: 10px;font-style: italic">';
+            temp += '<div>'+tc+'</div>'; //T.C. gelecek
+            temp += '<div>'+email+'</div></div> ';   //Tel No gelecel
+            temp += '<div class="container keyInfo" >Kartı Yoktur</div> </div>';
+            temp += '<div class="col-sm-4 forButtons">';
+            temp += '<div style="margin-top: 10px; margin-bottom: 5px;">';
+            temp += '<button type="button" class="btn btn-primary btn-lg" style="margin-right: 5px; width: 70px;" onclick="editingModal(' + user.id + ')">Düzenle</button>';
+            temp += '<button type="button" class="btn btn-primary btn-lg" style="width: 70px;"  onclick="deleteModal('+ user.id + ')" >Sil</button> </div >';
+            temp += '<div style="margin-top: 10px; margin-bottom: 5px;"><button type="button" class="btn btn-primary btn-lg" style="width: 145px;">Anahtar Yönetimi</button></div> </div> </div>';
+
+            tempDiv += temp;
+        }
+        usersList.innerHTML = tempDiv;
+    }
+
+        $(document).ready(function () {
+        // $("#fixed-form-container .body").hide();
+        getPage(0);
+
+    })
+
+    function editingModal(id) {
+
+        var divBodyandButton = document.getElementById("divBodyandButton");
+        var temModal ="" ;
+        temModal+="<div>Heeeey</div>"
+      /*  var tempModal = "";
+        for (var i in currentList) {
+            var user = currentList[i];
+            var temp = "";
+            if (user.id == id) {
+                temp +='<div class="modal-body" id="editModalBody">';
+                temp += '<input class="form-control" id="nameEdit" placeholder="Name" type="text" value="' + user.name + '"/>';
+                temp += '<input class="form-control" id="lastNameEdit" placeholder="Surname" type="text" value="' + user.surname + '"/>';
+                temp += '<input class="form-control" id="emailEdit" placeholder="E-Mail" type="text" value="' + user.email + '"/>';
+                temp += '<input class="form-control" id="passwordEdit" placeholder="Password"/>';
+                temp += '<input class="form-control" id="passwordEdit2" placeholder="Password Verify" />';
+                temp += '<input class="form-control" id="Role" placeholder="Role" type="text" value="' + user.roles[0].role + '"/>';
+                temp += '</div>';
+                temp +='<div class="modal-footer">';
+                temp +='<button type="button" id="editSave" onclick="editSave('+user.id+');" class="btn btn-primary">Save changes</button>';
+                temp +='<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>';
+                temp +='</div>';
+                tempModal += temp;
+            }
+        }*/
+
+        divBodyandButton.innerHTML = temModal;
+
+        /*$("#editModal").modal().show();*/
+        $("#editModal").modal('show');
+
+    }
+
+    function editSave(id) {
+        var user=[];
+        var name = nameEdit.value;
+        var lastName = lastNameEdit.value;
+        var email = emailEdit.value;
+        var password = passwordEdit.value;
+        var phone = editPhone.value;
+
+        $(".error").hide();
+        var hasError = false;
+        var errorType = "";
+        var checkVal = $("#passwordEdit2").val();
+        // if (passwordVal.length < 8 || passwordVal.length < 8) {
+        //     $("#password").after('<span class="error">Lütfen paralonızı 8 karakterdem fazla girin.</span>');
+        //     hasError = true;
+        // }
+        if (password != checkVal) {
+            $("#passwordEdit2").after('<span class="error">Parolanız eşleşmedi.</span>');
+            hasError = true;
+        }
+        user ={
+            id:id,
+            name:name,
+            lastName:lastName,
+            email:email,
+            password:password,
+            phone:phone
+        };
+        $.ajax({
+            url: "http://localhost:8080/guncelleAPI",
+            contentType: 'application/json',
+            traditional: true,
+            data:JSON.stringify(user),
+            dataType: 'json',
+            processData: false,
+            type: 'POST',
+            success: function (data) {
+                var status = data.status;
+                str = data.Objectdata;
+                if(data.successful ==true){
+                    $('#editModal').modal('toggle');
+                    $("#fixed-form-container .body").show();
+                    $(".popupCon").fadeToggle(3000);
+                    console.log("Kapatıldı");
+
+                    console.log(str);
+                }
+            },
+            error: function (data) {
+                console.log("Device control failed" + data);
+            }
+        })
+    }
+    function deleteModal(id) {
+        var deleteModal = document.getElementById("deleteModal");
+    }
+
+
     function openUsersSet() {
         var x = document.getElementById("userSetting");
         if (x.style.display === "none") {
@@ -458,7 +763,7 @@
         ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
         var s = document.getElementsByTagName('script')[0];
         s.parentNode.insertBefore(ga, s);
-    })();
+    });
 
 </script>
 </body>

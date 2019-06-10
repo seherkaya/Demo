@@ -8,7 +8,6 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
 import javax.sql.DataSource;
@@ -18,26 +17,51 @@ import javax.sql.DataSource;
 public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
 
+    @Autowired
+    private DataSource dataSource;
+
+    @Value("${spring.queries.users-query}")
+    private String usersQuery;
+
+    @Value("${spring.queries.roles-query}")
+    private String rolesQuery;
+
+    @Autowired
+    private CustomAuthenticationProvider authProvider;
+
+    @Override
+    protected void configure(AuthenticationManagerBuilder auth)
+            throws Exception {
+
+        auth.authenticationProvider(authProvider);
+    }
+
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.
                 authorizeRequests()
                 .antMatchers( "/" ).permitAll()
+
+                //ADMIN
+               // .antMatchers( "admin/home" ).hasAuthority( "ADMIN" )
+
                 .antMatchers( "/login" ).permitAll()
                 .antMatchers( "/loginAPI" ).permitAll()
+                .antMatchers( "/admin/home" ).permitAll()
+                .antMatchers( "/admin/listeAPI" ).permitAll()
                 //.antMatchers( "/admin/home" ).permitAll()
 
-                .antMatchers( "admin/home" ).hasAnyAuthority("ADMIN")
-                .antMatchers( "/admin/**" ).hasAuthority( "ADMIN" ).anyRequest()
-                .authenticated().and().csrf().disable().formLogin()
-                .loginPage("/giris").failureUrl("/giris?error=true")
-                .usernameParameter("email")
-                .passwordParameter("password")
+                //.antMatchers("/admin/**").hasAuthority("ADMIN").anyRequest()
+
+                .and().csrf().disable().formLogin()
+                .loginPage("/login").failureUrl("/login?error=true")
                 .and().logout()
                 .logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
                 .logoutSuccessUrl("/").and().exceptionHandling()
                 .accessDeniedPage("/access-denied");
-        ;
+                /*.antMatchers( "/admin/**" ).hasAuthority( "ADMIN" ).anyRequest()*/
+
+
 
 
     }

@@ -9,15 +9,12 @@ import org.springframework.web.bind.annotation.*;
 
 @Controller
 @RequestMapping(value = "/")
-
 public class InputController {
     @Autowired
     private UserServiceImpl userServiceImpl;
 
     @RequestMapping(value = "/login", method = RequestMethod.GET)
     public String giris() {
-        int a =0;
-        a=a+5;
         return "login";
     }
 
