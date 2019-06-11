@@ -9,10 +9,12 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
+import javax.validation.constraints.Null;
 import java.util.List;
 
 @Service("userService")
 public class UserServiceImpl implements UserService {
+
     @Autowired
     private UserRepository userRepository;
     @Autowired
@@ -69,10 +71,16 @@ public class UserServiceImpl implements UserService {
         CustomPageable cs ;
         if (name != null) {
 
-            cs= new CustomPageable(userRepository.findByName( name, PageRequest.of( pageNo,5) ));
+            cs= new CustomPageable(userRepository.findByName( name, PageRequest.of( pageNo,2) ));
+            if(cs== null){
+                pageNo=pageNo-1;
+            }
         } else {
 
-            cs= new CustomPageable(userRepository.findAll(PageRequest.of( pageNo,5)));
+            cs= new CustomPageable(userRepository.findAll(PageRequest.of( pageNo,2)));
+            if(cs== null){
+                pageNo=pageNo-1;
+            }
         }
 
         for (int i = 0; i < cs.getList().size(); i++) {

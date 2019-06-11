@@ -5,22 +5,23 @@
     <title>Anasayfa</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+
 </head>
 <style>
     body {
         font-size: medium;
         background-color: #f2f2f2;
     }
-
     a {
         text-align: center;
     }
-
     .centerDiv {
         padding: 0 30px;
         width: 1180px;
@@ -28,27 +29,22 @@
         background-color: white;
         border: 2px solid #D3D3D3;
         border-radius: 8px;
-
     }
-
     .userList {
+        width: auto;
         padding: 0 30px;
         margin: 0 auto;
         background-color: white;
         border: 1px solid #D3D3D3;
         border-radius: 8px;
-
     }
     .forUserInfo{
-
         margin-top: 10px;
         margin-bottom: 10px;
-
     }
     .bs-example {
         margin: 20px;
     }
-
     .main {
         margin: 50px auto;
     }
@@ -58,7 +54,6 @@
     .has-search .form-control {
         padding-left: 2.375rem;
     }
-
     .has-search .form-control-feedback {
         position: absolute;
         z-index: 2;
@@ -70,7 +65,6 @@
         pointer-events: none;
         color: #aaa;
     }
-
     .sidenav {
         margin-top: 3%;
         height: 100%;
@@ -83,39 +77,31 @@
         overflow-x: hidden;
         padding-top: 20px;
     }
-
     .sidenav a {
         padding: 6px 8px 6px 16px;
         color: #818181;
         display: block;
         margin-top: 35%;
     }
-
     .sidenav a:hover {
         color: #f1f1f1;
     }
-
     @media screen and (max-height: 450px) {
         .sidenav {
             padding-top: 15px;
         }
-
         .sidenav a {
             font-size: 18px;
         }
     }
-
     @font-face {
         font-family: 'WebSymbolsRegular';
         font-weight: normal;
         font-style: normal;
     }
-
     .ca-menu {
         padding: 0;
-
     }
-
     .ca-menu li {
         overflow: hidden;
         position: relative;
@@ -124,11 +110,9 @@
         margin-bottom: 4px;
         transition: all 300ms linear;
     }
-
     .ca-menu li:last-child {
         margin-bottom: 0px;
     }
-
     .ca-menu li a {
         text-align: left;
         width: 100%;
@@ -136,25 +120,12 @@
         display: block;
         color: white;
     }
-
     .ca-content {
         position: absolute;
         height: 60px;
         top: 20px;
     }
-
     .ca-main {
-
-        -webkit-transition: all 300ms linear;
-        -moz-transition: all 300ms linear;
-        -o-transition: all 300ms linear;
-        -ms-transition: all 300ms linear;
-        transition: all 300ms linear;
-    }
-
-    .ca-sub {
-        font-size: 14px;
-        color: #666;
         -webkit-transition: all 300ms linear;
         -moz-transition: all 300ms linear;
         -o-transition: all 300ms linear;
@@ -163,24 +134,21 @@
     }
 
     .ca-menu li:hover {
-        background: #e1f0fa;
+        background: #f0f0f0;
     }
-
     .ca-menu li:hover .ca-icon {
-        font-size: 40px;
-        color: #259add;
+
+        color: lightgray;
         opacity: 0.8;
         text-shadow: 0px 0px 13px #fff;
     }
-
     .ca-menu li:hover .ca-main {
         opacity: 1;
-        color: #2676ac;
+        color: darkgrey;
         -webkit-animation: moveFromTop 300ms ease-in-out;
         -moz-animation: moveFromTop 300ms ease-in-out;
         -ms-animation: moveFromTop 300ms ease-in-out;
     }
-
     .ca-menu li:hover .ca-sub {
         opacity: 1;
         -webkit-animation: moveFromBottom 300ms ease-in-out;
@@ -188,123 +156,17 @@
         -ms-animation: moveFromBottom 300ms ease-in-out;
     }
 
-    @-webkit-keyframes moveFromBottom {
-        from {
-            opacity: 0;
-            -webkit-transform: translateY(200%);
-        }
-        to {
-            opacity: 1;
-            -webkit-transform: translateY(0%);
-        }
-    }
-
-    @-moz-keyframes moveFromBottom {
-        from {
-            opacity: 0;
-            -moz-transform: translateY(200%);
-        }
-        to {
-            opacity: 1;
-            -moz-transform: translateY(0%);
-        }
-    }
-
-    @-ms-keyframes moveFromBottom {
-        from {
-            opacity: 0;
-            -ms-transform: translateY(200%);
-        }
-        to {
-            opacity: 1;
-            -ms-transform: translateY(0%);
-        }
-    }
-
-    @-webkit-keyframes moveFromTop {
-        from {
-            opacity: 0;
-            -webkit-transform: translateY(-200%);
-        }
-        to {
-            opacity: 1;
-            -webkit-transform: translateY(0%);
-        }
-    }
-
-    @-moz-keyframes moveFromTop {
-        from {
-            opacity: 0;
-            -moz-transform: translateY(-200%);
-        }
-        to {
-            opacity: 1;
-            -moz-transform: translateY(0%);
-        }
-    }
-
-    @-ms-keyframes moveFromTop {
-        from {
-            opacity: 0;
-            -ms-transform: translateY(-200%);
-        }
-        to {
-            opacity: 1;
-            -ms-transform: translateY(0%);
-        }
-    }
     .forNameAndAut{
+        width: auto;
         padding: 0px;
     }
-
 </style>
 <body>
-<div class="modal fade" id="editModal" role="dialog">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title"><b>EDIT</b></h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div id="divBodyandButton">
 
-            </div>
-        </div>
-    </div>
-</div>
-<div class="modal fade" id="deleteModal" role="dialog">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <button class="close" data-dismiss="modal" type="button">&times;</button>
-                <h4 class="modal-title">DELETE</h4>
-            </div>
-
-            <div class="modal-body" id="deleteModalBody" style="font-size: 16pt;">
-                <h1><b>Are You Sure ?</b></h1>
-                <div class="row">
-                    <div class="col-xs-12" id="userDeleteDiv" style="padding: 5px 15px 5px 15px;">
-                    </div>
-                    <div class="col-xs-0" id="userDeleteDiv1" style="padding: 5px 15px 5px 15px;">
-
-                    </div>
-                </div>
-            </div>
-
-            <div class="modal-footer">
-                <button class="btn btn-danger" data-dismiss="modal" type="button">Kapat</button>
-                <button class="btn btn-warning" data-dismiss="modal" type="button">Kapat</button>
-            </div>
-        </div>
-
-    </div>
-</div>
 
 <div class="bodyDiv">
-    <div class="row" id="forNavbar" style="margin:6%; margin-bottom: 0px;">
-        <nav class="navbar navbar-expand-lg bg-dark navbar-dark fixed-top">
+    <div class="row" id="forNavbar" style="margin-bottom: 0px;">
+        <nav class="navbar navbar-expand-lg bg-dark navbar-dark fixed-top" style="width: 100%;">
             <a class="navbar-brand" href="#"></a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
                 <span class="navbar-toggler-icon"></span>
@@ -341,7 +203,7 @@
 
 
             </div>
-            <ul class="nav navbar-nav ">
+            <ul class="nav navbar-nav " style="padding-right: 20px;">
 
                 <li><a class="nav-link" href="#"><span class="glyphicon glyphicon-log-in"></span> Çıkış </a></li>
             </ul>
@@ -350,29 +212,139 @@
     </div>
     <div class="row" id="userSetting" style="display: none">
         <div class="col-sm-12">
+            <div class="modal fade" id="editModal" role="dialog">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title"><b>EDIT</b></h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div id="divBodyandButton">
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal fade" id="deleteModal" role="dialog">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button class="close" data-dismiss="modal" type="button">&times;</button>
+                            <h4 class="modal-title">DELETE</h4>
+                        </div>
+
+                        <div class="modal-body" id="deleteModalBody" style="font-size: 16pt;">
+                            <h1><b>Are You Sure ?</b></h1>
+                            <div class="row">
+                                <div class="col-xs-12" id="userDeleteDiv" style="padding: 5px 15px 5px 15px;">
+                                </div>
+                                <div class="col-xs-0" id="userDeleteDiv1" style="padding: 5px 15px 5px 15px;">
+
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="modal-footer">
+                            <button class="btn btn-danger" data-dismiss="modal" type="button">Kapat</button>
+                            <button class="btn btn-warning" data-dismiss="modal" type="button">Kapat</button>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+            <div class="modal fade" id="keyModal" role="dialog">
+                <div class="modal-dialog modal-lg">
+                    <div class="modal-content" style="padding: 15px;">
+                        <div class="modal-header">
+                            <h5 class="modal-title"><b>EDIT</b></h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div id="divBodyandKey">
+                            <div class="row">
+                                <div class="col-xs-5">
+                                    <select name="from" id="undo_redo" class="form-control" size="13"
+                                            multiple="multiple">
+                                        <option value="1">1</option>
+                                        <option value="2">2</option>
+                                        <option value="3">3</option>
+                                        <option value="4">4</option>
+                                        <option value="5">5</option>
+                                        <option value="6">6</option>
+                                        <option value="7">7</option>
+                                        <option value="8">8</option>
+                                        <option value="9">9</option>
+                                        <option value="10">10</option>
+                                        <option value="11">11</option>
+                                        <option value="12">12</option>
+                                        <option value="13">13</option>
+                                    </select>
+                                </div>
+
+                                <div class="col-xs-2">
+                                    <button type="button" id="undo_redo_undo" class="btn btn-primary btn-block">undo
+                                    </button>
+                                    <button type="button" id="undo_redo_rightAll" class="btn btn-default btn-block"><i
+                                            class="glyphicon glyphicon-forward"></i></button>
+                                    <button type="button" id="undo_redo_rightSelected"
+                                            class="btn btn-default btn-block"><i
+                                            class="glyphicon glyphicon-chevron-right"></i></button>
+                                    <button type="button" id="undo_redo_leftSelected" class="btn btn-default btn-block">
+                                        <i class="glyphicon glyphicon-chevron-left"></i></button>
+                                    <button type="button" id="undo_redo_leftAll" class="btn btn-default btn-block"><i
+                                            class="glyphicon glyphicon-backward"></i></button>
+                                    <button type="button" id="undo_redo_redo" class="btn btn-warning btn-block">redo
+                                    </button>
+                                </div>
+
+                                <div class="col-xs-5">
+                                    <select name="to" id="undo_redo_to" class="form-control" size="13"
+                                            multiple="multiple"></select>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
             <div class="container">
                 <div class="col-sm-2"></div>
                 <div class="col-sm-8 centerDiv">
                     <div class="main">
                         <div class="form-group has-search">
                             <span class="fa fa-search form-control-feedback"></span>
-                            <input type="text" class="form-control" placeholder="Search">
+                            <input type="text" id="inputSearch" class="form-control" placeholder="Search"
+                                   onkeyup="listing(str)">
                         </div>
                         <!-- Kullanıcı listeler-->
 
                         <div class="bs-example">
                             <nav>
-                                <ul class="pagination justify-content-center">
+                                <ul class="pagination justify-content-center" style="width: 100%;">
+                                    <div class="col-sm-12">
+                                        <div class="col-sm-4">
+                                            <button id="btnPrevPage" type="button" class="btn btn-light "
+                                                    style="margin-right: 5px; width: 70px;" onclick="previousPage()"><<
+                                            </button>
 
-                                    <li id="btnPrevPage" class="page-item disabled"><span class="page-link" onclick="previousPage()">Previous</span></li>
+                                        </div>
+                                        <div class="col-sm-4">
+                                            <div id="pageNumber" >
 
-                                    <li  class="page-item active"><a href="#" class="page-link">1</a></li>
-                                    <li class="page-item"><a href="#" class="page-link">2</a></li>
-                                    <li class="page-item"><a href="#" class="page-link">3</a></li>
-                                    <li class="page-item"><a href="#" class="page-link">4</a></li>
-                                    <li class="page-item"><a href="#" class="page-link">5</a></li>
+                                            </div>
 
-                                    <li id="btnNextPage" class="page-item"><a href="#" class="page-link" onclick="nextPage()">Next</a></li>
+                                        </div>
+                                        <div class="col-sm-4">
+                                            <button id="btnNextPage" type="button" class="btn btn-light "
+                                                    style="margin-right: 5px; width: 70px;" onclick="nextPage()">>>
+                                            </button>
+                                        </div>
+
+
+                                    </div>
                                 </ul>
                             </nav>
                         </div>
@@ -383,56 +355,22 @@
             <div class="container">
                 <div class="col-sm-2"></div>
                 <div class="col-sm-8 centerDiv2" style="padding: 0px">
-                    <!--USER LİSTELEMEK İÇİN -->
                     <div id ="usersList" class="container usersList" style="width: 100%; padding: 0px;">
-                        <!--<div class="container userList" >
-                            <div class="col-sm-9 forUserInfo">
-                                <div class="container forNameAndAut">
-                                    <div class="col-sm-4">Ahmet Ali</div>
-                                    <div class="col-sm-2" style="background-color: red;color: white;text-align: center">Admin</div>
-                                    <div class="col-sm-6"></div>
-                                </div>
-                                <div class="container forInfo" style="font-size: 10px;font-style: italic">
-                                    <div>152120121043</div>
-                                    <div>+905052258986</div>
-                                </div>
-                                <div class="container keyInfo" >Kartı Yoktur</div>
-                            </div>
-                            <div class="col-sm-3 forButtons">
-                                <div style="margin-top: 10px; margin-bottom: 5px;">
-                                    <button type="button" class="btn btn-primary btn-lg">Düzenle</button>
-                                    <button type="button" class="btn btn-primary btn-lg">Sil</button>
-                                </div >
-                                <div style="margin-top: 10px; margin-bottom: 5px;"><button type="button" class="btn btn-primary btn-lg">Anahtar Yönetimi</button></div>
 
-                            </div>
-                        </div>
-                        <div class="container userList">
-                            <div class="col-sm-9 forUserInfo">
-                                <div class="container forNameAndAut">
-                                    <div class="col-sm-4">Ahmet Ali</div>
-                                    <div class="col-sm-2" style="background-color: red;color: white;text-align: center">Admin</div>
-                                    <div class="col-sm-6"></div>
-                                </div>
-                                <div class="container forInfo" style="font-size: 10px;font-style: italic">
-                                    <div>152120121043</div>
-                                    <div>+905052258986</div>
-                                </div>
-                                <div class="container keyInfo" >Kartı Yoktur</div>
-                            </div>
-                            <div class="col-sm-3 forButtons">
-                                <div style="margin-top: 10px; margin-bottom: 5px;">
-                                    <button type="button" class="btn btn-primary btn-lg">Düzenle</button>
-                                    <button type="button" class="btn btn-primary btn-lg">Sil</button>
-                                </div >
-                                <div style="margin-top: 10px; margin-bottom: 5px;"><button type="button" class="btn btn-primary btn-lg">Anahtar Yönetimi</button></div>
-
-                            </div>
-                        </div>
--->
                     </div>
                 </div>
                 <div class="col-sm-2"></div>
+            </div>
+        </div>
+        <div class="col-sm-4">
+            <div id="popupDiv">
+                <section id="fixed-form-container" class="popupCon">
+                    <div class="body">
+                        <div class="form-group">
+                            <label style="color:#9A9EA0">Kayıt Başarılı </label>
+                        </div>
+                    </div>
+                </section>
             </div>
         </div>
     </div>
@@ -451,8 +389,9 @@
                     <div class="main">
                         <div class="form-group has-search">
                             <span class="fa fa-search form-control-feedback"></span>
-                            <input id="inputSearch" type="text" class="form-control" placeholder="Search">
+                            <input type="text" class="form-control" placeholder="Search">
                         </div>
+
                     </div>
                 </div>
                 <div class="col-sm-2"></div>
@@ -460,7 +399,6 @@
             <div class="container">
                 <div class="col-sm-2"></div>
                 <div class="col-sm-8 centerDiv">
-                    <!--USER LİSTELEMEK İÇİN -->
                 </div>
                 <div class="col-sm-2"></div>
             </div>
@@ -475,28 +413,22 @@
                         <li>
                             <a href="#">
                                 <div class="ca-content">
-                                    <h2 class="ca-main">Sistem Bakım-Onarım Modu</h2>
+                                    <h2 style="font-size: medium; color:#9A9EA0" class="ca-main">Sistem Bakım-Onarım
+                                        Modu</h2>
                                 </div>
                             </a>
                         </li>
                         <li>
                             <a href="#">
                                 <div class="ca-content">
-                                    <h2 class="ca-main">Sistem Başlangıç Ayar Modu</h2>
+                                    <h2 style="font-size: medium; color:#9A9EA0" class="ca-main">Sistem Başlangıç Ayar
+                                        Modu</h2>
                                 </div>
                             </a>
                         </li>
                     </ul>
                 </div><!-- content -->
             </div>
-            <!-- <div id="systemRepairMode">
-
-                 &lt;!&ndash;modal gelecek&ndash;&gt;
-             </div>
-             <div id="systemRecoveryMode">
-
-                 &lt;!&ndash;modal gelecek&ndash;&gt;
-             </div>-->
         </div>
         <div class="col-sm-2"></div>
     </div>
@@ -506,8 +438,10 @@
     var str="";
     var totalPages;
     var currentPage;
-
     var currentList = [];
+    var pageLi = document.getElementById('pageNumber');
+    var tempLi = "";
+    var totalPage="";
     function getPage(page, name) {
         console.log("getPage:" + page);
         console.log("getPage:" + name);
@@ -525,21 +459,33 @@
             success: function (data) {
                 var status = data.status;
                 str = data.data;
+                totalPage =data.data.totalPages;
                 if (data.successful == true) {
                     currentPage = str;
                     if (currentPage.isFirst) {
-                        $("#btnPrevPage").prop("disabled", "disabled");
+                        $('#btnPrevPage').prop('disabled', true)
                     }
                     else {
-                        $("#btnPrevPage").prop("disabled", "");
+                        $("#btnPrevPage").prop('disabled', false);
                     }
                     if (currentPage.isLast) {
-                        $("#btnNextPage").prop("disabled", "disabled");
+                        $("#btnNextPage").prop('disabled', true);
                     }
                     else {
-                        $("#btnNextPage").prop("disabled", "");
+                        $("#btnNextPage").prop('disabled', false);
                     }
-                    console.log(str);
+
+                    pageLi.innerHTML = "";
+                    var html = "<select onchange='search(this.value)' class='form-control'>";
+                    for (var i = 0; i < currentPage.totalPages; i++) {
+                        if (i == page) {
+                            html += "<option value='" + i + "' selected='selected'>" + i + "</option>";
+                        } else {
+                            html += "<option value='" + i + "' >" + i + "</option>";
+                        }
+                    }
+                    html += "</select>";
+                    pageLi.innerHTML = html;
                     currentList = str.list;
                     listing(str);
                     if (status == 0) {
@@ -550,16 +496,15 @@
             error: function (data) {
                 console.log("Device control failed" + data);
             }
-
         })
-
     }
+
+
     function listing(str) {
         var myObject = str.list;
         var mainContainer = document.getElementById('usersList');
         var tempDiv = "";
-        var currentQuery = inputSearch.value;
-
+        var currentQuery = inputSearch.value.toUpperCase();
 
 
         for (var i in myObject) {
@@ -567,12 +512,11 @@
             var name = user.name;
             var surname=user.surname;
             var role = user.roles[0].role;
+            var enviroment = user.environment[0].environment_name;
             var tc = user.tc;
             var email = user.email;
             var temp = "";
-
-            if (currentQuery != "" && (!name.includes(currentQuery) && !lastName.includes(currentQuery))) {
-
+            if (currentQuery != "" && (!name.includes(currentQuery) && !surname.includes(currentQuery))) {
                 continue;
             }
 
@@ -585,57 +529,54 @@
             temp += '<div class="container forInfo" style="font-size: 10px;font-style: italic">';
             temp += '<div>'+tc+'</div>'; //T.C. gelecek
             temp += '<div>'+email+'</div></div> ';   //Tel No gelecel
-            temp += '<div class="container keyInfo" >Kartı Yoktur</div> </div>';
+            temp += '<div class="container keyInfo" >' + enviroment + '</div> </div>';
             temp += '<div class="col-sm-4 forButtons">';
             temp += '<div style="margin-top: 10px; margin-bottom: 5px;">';
-            temp += '<button type="button" class="btn btn-primary btn-lg" style="margin-right: 5px; width: 70px;" onclick="editingModal(' + user.id + ')">Düzenle</button>';
-            temp += '<button type="button" class="btn btn-primary btn-lg" style="width: 70px;"  onclick="deleteModal('+ user.id + ')" >Sil</button> </div >';
-            temp += '<div style="margin-top: 10px; margin-bottom: 5px;"><button type="button" class="btn btn-primary btn-lg" style="width: 145px;">Anahtar Yönetimi</button></div> </div> </div>';
-
+            temp += '<button type="button" class="btn btn-primary " style="margin-right: 5px; width: 70px;" onclick="editingModal(' + user.id + ')">Düzenle</button>';
+            temp += '<button type="button" class="btn btn-primary " style="width: 70px;"  onclick="deleteModal(' + user.id + ')" >Sil</button> </div >';
+            temp += '<div style="margin-top: 10px; margin-bottom: 5px;"><button type="button" class="btn btn-primary " style="width: 145px;" onclick="keyModal(' + user.id + ')">Anahtar Yönetimi</button></div> </div> </div>';
             tempDiv += temp;
         }
         usersList.innerHTML = tempDiv;
     }
 
-        $(document).ready(function () {
-        // $("#fixed-form-container .body").hide();
+    $(document).ready(function () {
+        $("#fixed-form-container .body").hide();
         getPage(0);
 
     })
 
+    function keyModal() {
+        $("#keyModal").modal('show');
+    }
     function editingModal(id) {
-
+        $("#editModal").modal('show');
         var divBodyandButton = document.getElementById("divBodyandButton");
-        var temModal ="" ;
-        temModal+="<div>Heeeey</div>"
-      /*  var tempModal = "";
+        var tempModal = "";
         for (var i in currentList) {
             var user = currentList[i];
             var temp = "";
             if (user.id == id) {
-                temp +='<div class="modal-body" id="editModalBody">';
+                temp += '<div class="modal-body" id="editModalBody">';
                 temp += '<input class="form-control" id="nameEdit" placeholder="Name" type="text" value="' + user.name + '"/>';
                 temp += '<input class="form-control" id="lastNameEdit" placeholder="Surname" type="text" value="' + user.surname + '"/>';
                 temp += '<input class="form-control" id="emailEdit" placeholder="E-Mail" type="text" value="' + user.email + '"/>';
                 temp += '<input class="form-control" id="passwordEdit" placeholder="Password"/>';
                 temp += '<input class="form-control" id="passwordEdit2" placeholder="Password Verify" />';
-                temp += '<input class="form-control" id="Role" placeholder="Role" type="text" value="' + user.roles[0].role + '"/>';
+                temp += '<input class="form-control" id="role" placeholder="Role" type="text" value="' + user.roles[0].role + '"/>';
+                temp += '<input class="form-control" id="enviroment" placeholder="Environment" type="text" value="' + user.environment[0].environment_name + '"/>'; //Selection box gelecek
                 temp += '</div>';
-                temp +='<div class="modal-footer">';
-                temp +='<button type="button" id="editSave" onclick="editSave('+user.id+');" class="btn btn-primary">Save changes</button>';
-                temp +='<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>';
-                temp +='</div>';
+                temp += '<div class="modal-footer">';
+                temp += '<button type="button" id="editSave" onclick="editSave(' + user.id + ');" class="btn btn-primary">Save changes</button>';
+                temp += '<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>';
+                temp += '</div>';
                 tempModal += temp;
             }
-        }*/
-
-        divBodyandButton.innerHTML = temModal;
-
+        }
+        divBodyandButton.innerHTML = tempModal;
         /*$("#editModal").modal().show();*/
-        $("#editModal").modal('show');
 
     }
-
     function editSave(id) {
         var user=[];
         var name = nameEdit.value;
@@ -643,7 +584,6 @@
         var email = emailEdit.value;
         var password = passwordEdit.value;
         var phone = editPhone.value;
-
         $(".error").hide();
         var hasError = false;
         var errorType = "";
@@ -680,7 +620,6 @@
                     $("#fixed-form-container .body").show();
                     $(".popupCon").fadeToggle(3000);
                     console.log("Kapatıldı");
-
                     console.log(str);
                 }
             },
@@ -689,10 +628,32 @@
             }
         })
     }
+
+
+    $("select.selectPage").change(function(){
+        var selectedPage= $(this).children("option:selected").val();
+        getPage(selectedPage);
+    });
     function deleteModal(id) {
         var deleteModal = document.getElementById("deleteModal");
     }
 
+    function previousPage() {
+        if (!currentPage.isFirst) {
+            search(currentPage.number - 1);
+        }
+    }
+
+    function nextPage() {
+        if (!currentPage.isLast) {
+            search(currentPage.number + 1);
+        }
+    }
+
+    function search(page) {
+        page = (page == null) ? 0 : page;
+        getPage(page);
+    }
 
     function openUsersSet() {
         var x = document.getElementById("userSetting");
@@ -707,7 +668,6 @@
             document.getElementById('systemSetting').style.display = "none";
         }
     }
-
     function openRolesSet() {
         var x = document.getElementById("roleSetting");
         if (x.style.display === "none") {
@@ -721,7 +681,6 @@
             document.getElementById('systemSetting').style.display = "none";
         }
     }
-
     function openKeysSet() {
         var x = document.getElementById("keySetting");
         if (x.style.display === "none") {
@@ -729,15 +688,12 @@
             document.getElementById('roleSetting').style.display = "none";
             document.getElementById('userSetting').style.display = "none";
             document.getElementById('systemSetting').style.display = "none";
-
         } else {
             document.getElementById('roleSetting').style.display = "none";
             document.getElementById('userSetting').style.display = "none";
             document.getElementById('systemSetting').style.display = "none";
         }
-
     }
-
     function openSysSet() {
         var x = document.getElementById("systemSetting");
         if (x.style.display === "none") {
@@ -755,7 +711,6 @@
     var _gaq = _gaq || [];
     _gaq.push(['_setAccount', 'UA-7243260-2']);
     _gaq.push(['_trackPageview']);
-
     (function () {
         var ga = document.createElement('script');
         ga.type = 'text/javascript';
@@ -764,7 +719,6 @@
         var s = document.getElementsByTagName('script')[0];
         s.parentNode.insertBefore(ga, s);
     });
-
 </script>
 </body>
 </html>

@@ -16,9 +16,9 @@ import javax.sql.DataSource;
 @EnableWebSecurity
 public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
-
     @Autowired
-    private DataSource dataSource;
+    private CustomAuthenticationProvider authProvider;
+
 
     @Value("${spring.queries.users-query}")
     private String usersQuery;
@@ -26,13 +26,9 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     @Value("${spring.queries.roles-query}")
     private String rolesQuery;
 
-    @Autowired
-    private CustomAuthenticationProvider authProvider;
-
     @Override
     protected void configure(AuthenticationManagerBuilder auth)
             throws Exception {
-
         auth.authenticationProvider(authProvider);
     }
 
@@ -60,6 +56,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .logoutSuccessUrl("/").and().exceptionHandling()
                 .accessDeniedPage("/access-denied");
                 /*.antMatchers( "/admin/**" ).hasAuthority( "ADMIN" ).anyRequest()*/
+
 
 
 
