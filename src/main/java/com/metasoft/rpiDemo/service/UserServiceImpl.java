@@ -98,11 +98,11 @@ public class UserServiceImpl implements UserService {
 
     public ApiResponse enrollEnvironment(int user_id, int environment_id ) {
         ApiResponse response = new ApiResponse();
-        User userExist;
-        Environment environmentExist;
-        if(user_id!=null && environment_id!=null ) {
-            userExist= userRepository.findById(1);
-            environmentExist=environmentRepository.findById( 5 );
+        User userExist =userRepository.findById( user_id );
+        Environment environmentExist =environmentRepository.findById( environment_id );
+
+        if(userExist!=null && environmentExist!=null ) {
+             //kaydetme işlemleri
 
         }
 
