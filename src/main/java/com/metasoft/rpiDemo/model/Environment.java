@@ -18,7 +18,7 @@ public class Environment {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "environment_id")
-    private Integer id;
+    private int id;
 
     @Column(name = "environment_name")
     private String environment_name;
@@ -42,11 +42,11 @@ public class Environment {
     private String environment_ack;
 
 
-    public Integer getId() {
+    public int getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(int id) {
         this.id = id;
     }
 

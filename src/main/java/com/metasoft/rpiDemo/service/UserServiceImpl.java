@@ -10,6 +10,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
 import javax.validation.constraints.Null;
+import java.lang.reflect.Array;
 import java.util.List;
 
 @Service("userService")
@@ -92,4 +93,23 @@ public class UserServiceImpl implements UserService {
 
         return response;
     }
+
+
+
+    public ApiResponse enrollEnvironment(int user_id, int environment_id ) {
+        ApiResponse response = new ApiResponse();
+        User userExist;
+        Environment environmentExist;
+        if(user_id!=null && environment_id!=null ) {
+            userExist= userRepository.findById(1);
+            environmentExist=environmentRepository.findById( 5 );
+
+        }
+
+        /*response.setData(  );*/
+        response.setSuccessful( true );
+
+        return response;
+    }
+
 }

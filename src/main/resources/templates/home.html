@@ -11,8 +11,6 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-
-
 </head>
 <style>
     body {
@@ -21,6 +19,10 @@
     }
     a {
         text-align: center;
+    }
+
+    .ms-container {
+        width: 100%;
     }
     .centerDiv {
         padding: 0 30px;
@@ -132,7 +134,6 @@
         -ms-transition: all 300ms linear;
         transition: all 300ms linear;
     }
-
     .ca-menu li:hover {
         background: #f0f0f0;
     }
@@ -155,15 +156,13 @@
         -moz-animation: moveFromBottom 300ms ease-in-out;
         -ms-animation: moveFromBottom 300ms ease-in-out;
     }
-
     .forNameAndAut{
         width: auto;
         padding: 0px;
     }
+
 </style>
 <body>
-
-
 <div class="bodyDiv">
     <div class="row" id="forNavbar" style="margin-bottom: 0px;">
         <nav class="navbar navbar-expand-lg bg-dark navbar-dark fixed-top" style="width: 100%;">
@@ -175,28 +174,28 @@
                 <ul class="navbar-nav">
                     <div>
                         <li class="nav-item" style="width: 100px">
-                            <a class="nav-link" href="#" onclick=openUsersSet()>Kullanıcılar</a>
+                            <a class="nav-link" href="#" onclick=openUsersSet()>USERS</a>
                         </li>
                     </div>
                     <div>
                         <li class="nav-item" style="width: 100px">
-                            <a class="nav-link" href="#" onclick=openRolesSet()>Roller</a>
+                            <a class="nav-link" href="#" onclick=openRolesSet()>ROLES</a>
                         </li>
                     </div>
                     <div>
                         <li class="nav-item dropdown" style="width: 100px">
-                            <a class="nav-link dropdown" href="#" onclick=openKeysSet()>Anahtarlar</a>
+                            <a class="nav-link dropdown" href="#" onclick=openKeysSet()>KEYS</a>
 
                             <div class="dropdown-menu">
-                                <a class="dropdown-item" href="#">Kartlar</a>
-                                <a class="dropdown-item" href="#">Parmak İzi</a>
-                                <a class="dropdown-item" href="#">Görüntüler 3</a>
+                                <a class="dropdown-item" href="#">CARDS</a>
+                                <a class="dropdown-item" href="#">FINGER PRINTS</a>
+                                <a class="dropdown-item" href="#">IMAGES</a>
                             </div>
                         </li>
                     </div>
                     <div>
                         <li class="nav-item" style="width: 100px">
-                            <a class="nav-link" href="#" onclick=openSysSet()>Sistem</a>
+                            <a class="nav-link" href="#" onclick=openSysSet()>SYSTEM</a>
                         </li>
                     </div>
                 </ul>
@@ -258,54 +257,34 @@
                 <div class="modal-dialog modal-lg">
                     <div class="modal-content" style="padding: 15px;">
                         <div class="modal-header">
-                            <h5 class="modal-title"><b>EDIT</b></h5>
+                            <h5 class="modal-title"><b>KEY MANAGMENT</b></h5>
                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                 <span aria-hidden="true">&times;</span>
                             </button>
                         </div>
                         <div id="divBodyandKey">
                             <div class="row">
-                                <div class="col-xs-5">
-                                    <select name="from" id="undo_redo" class="form-control" size="13"
-                                            multiple="multiple">
-                                        <option value="1">1</option>
-                                        <option value="2">2</option>
-                                        <option value="3">3</option>
-                                        <option value="4">4</option>
-                                        <option value="5">5</option>
-                                        <option value="6">6</option>
-                                        <option value="7">7</option>
-                                        <option value="8">8</option>
-                                        <option value="9">9</option>
-                                        <option value="10">10</option>
-                                        <option value="11">11</option>
-                                        <option value="12">12</option>
-                                        <option value="13">13</option>
-                                    </select>
+                                <div class="col-sm-12">
+                                    <div class="col-sm-5">
+                                        <select class="form-control" id='callbacks' multiple='multiple' style="width: 100%">
+
+                                        </select>
+                                    </div>
+                                    <div class="col-sm-2" id="forKeyButton">
+
+                                    </div>
+                                    <div class="col-sm-5">
+                                        <select class="form-control" id='callbacks2' multiple='multiple' style="width: 100%">
+
+                                        </select>
+                                    </div>
+                                    <div id="keySave">
+
+                                    </div>
+
                                 </div>
 
-                                <div class="col-xs-2">
-                                    <button type="button" id="undo_redo_undo" class="btn btn-primary btn-block">undo
-                                    </button>
-                                    <button type="button" id="undo_redo_rightAll" class="btn btn-default btn-block"><i
-                                            class="glyphicon glyphicon-forward"></i></button>
-                                    <button type="button" id="undo_redo_rightSelected"
-                                            class="btn btn-default btn-block"><i
-                                            class="glyphicon glyphicon-chevron-right"></i></button>
-                                    <button type="button" id="undo_redo_leftSelected" class="btn btn-default btn-block">
-                                        <i class="glyphicon glyphicon-chevron-left"></i></button>
-                                    <button type="button" id="undo_redo_leftAll" class="btn btn-default btn-block"><i
-                                            class="glyphicon glyphicon-backward"></i></button>
-                                    <button type="button" id="undo_redo_redo" class="btn btn-warning btn-block">redo
-                                    </button>
-                                </div>
-
-                                <div class="col-xs-5">
-                                    <select name="to" id="undo_redo_to" class="form-control" size="13"
-                                            multiple="multiple"></select>
-                                </div>
                             </div>
-
                         </div>
                     </div>
                 </div>
@@ -320,7 +299,6 @@
                                    onkeyup="listing(str)">
                         </div>
                         <!-- Kullanıcı listeler-->
-
                         <div class="bs-example">
                             <nav>
                                 <ul class="pagination justify-content-center" style="width: 100%;">
@@ -342,8 +320,6 @@
                                                     style="margin-right: 5px; width: 70px;" onclick="nextPage()">>>
                                             </button>
                                         </div>
-
-
                                     </div>
                                 </ul>
                             </nav>
@@ -361,16 +337,16 @@
                 </div>
                 <div class="col-sm-2"></div>
             </div>
-        </div>
-        <div class="col-sm-4">
-            <div id="popupDiv">
-                <section id="fixed-form-container" class="popupCon">
-                    <div class="body">
-                        <div class="form-group">
-                            <label style="color:#9A9EA0">Kayıt Başarılı </label>
+            <div id="forpopup">
+                <div id="popupDiv">
+                    <section id="fixed-form-container" class="popupCon">
+                        <div class="body">
+                            <div class="form-group">
+                                <label style="color:#9A9EA0">Kayıt Başarılı </label>
+                            </div>
                         </div>
-                    </div>
-                </section>
+                    </section>
+                </div>
             </div>
         </div>
     </div>
@@ -413,16 +389,14 @@
                         <li>
                             <a href="#">
                                 <div class="ca-content">
-                                    <h2 style="font-size: medium; color:#9A9EA0" class="ca-main">Sistem Bakım-Onarım
-                                        Modu</h2>
+                                    <h2 style="font-size: medium; color:#9A9EA0" class="ca-main">SYSTEM RECOVERY MODE</h2>
                                 </div>
                             </a>
                         </li>
                         <li>
                             <a href="#">
                                 <div class="ca-content">
-                                    <h2 style="font-size: medium; color:#9A9EA0" class="ca-main">Sistem Başlangıç Ayar
-                                        Modu</h2>
+                                    <h2 style="font-size: medium; color:#9A9EA0" class="ca-main"> SYSTEM SETTING MODE</h2>
                                 </div>
                             </a>
                         </li>
@@ -432,293 +406,389 @@
         </div>
         <div class="col-sm-2"></div>
     </div>
-</div>
-<script>
-    var name = "";
-    var str="";
-    var totalPages;
-    var currentPage;
-    var currentList = [];
-    var pageLi = document.getElementById('pageNumber');
-    var tempLi = "";
-    var totalPage="";
-    function getPage(page, name) {
-        console.log("getPage:" + page);
-        console.log("getPage:" + name);
-        var api = "http://localhost:8080/admin/listeAPI?pageNo=" + page;
-        if (name != null) {
-            api += "&name=" + name;
-        }
-        $.ajax({
-            url: api,
-            contentType: 'application/json',
-            traditional: true,
-            dataType: 'json',
-            processData: false,
-            type: 'POST',
-            success: function (data) {
-                var status = data.status;
-                str = data.data;
-                totalPage =data.data.totalPages;
-                if (data.successful == true) {
-                    currentPage = str;
-                    if (currentPage.isFirst) {
-                        $('#btnPrevPage').prop('disabled', true)
-                    }
-                    else {
-                        $("#btnPrevPage").prop('disabled', false);
-                    }
-                    if (currentPage.isLast) {
-                        $("#btnNextPage").prop('disabled', true);
-                    }
-                    else {
-                        $("#btnNextPage").prop('disabled', false);
-                    }
+    <script>
 
-                    pageLi.innerHTML = "";
-                    var html = "<select onchange='search(this.value)' class='form-control'>";
-                    for (var i = 0; i < currentPage.totalPages; i++) {
-                        if (i == page) {
-                            html += "<option value='" + i + "' selected='selected'>" + i + "</option>";
-                        } else {
-                            html += "<option value='" + i + "' >" + i + "</option>";
+
+        var optList = ["ALI", "VELI", "ELLI"];
+        /*        <option value='elem_1'>elem 1</option>
+                    <option value='elem_2'>elem 2</option>
+                    <option value='elem_3'>elem 3</option>
+                    <option value='elem_4'>elem 4</option>
+                    <option value='elem_100'>elem 100</option>
+        */
+
+        var name = "";
+        var str = "";
+        var totalPages;
+        var currentPage;
+        var currentList = [];
+        var pageLi = document.getElementById('pageNumber');
+        var tempLi = "";
+        var totalPage = "";
+        var keyOption = document.getElementById('callbacks');
+        var forKeyButton = document.getElementById('forKeyButton');
+        var keyOption2 = document.getElementById('callbacks2');
+        var keySave =document.getElementById('keySave');
+
+
+        function getPage(page, name) {
+            console.log("getPage:" + page);
+            console.log("getPage:" + name);
+            var api = "http://localhost:8080/admin/listAPI?pageNo=" + page;
+            if (name != null) {
+                api += "&name=" + name;
+            }
+            $.ajax({
+                url: api,
+                contentType: 'application/json',
+                traditional: true,
+                dataType: 'json',
+                processData: false,
+                type: 'POST',
+                success: function (data) {
+                    var status = data.status;
+                    str = data.data;
+                    totalPage = data.data.totalPages;
+                    if (data.successful == true) {
+                        currentPage = str;
+                        if (currentPage.isFirst) {
+                            $('#btnPrevPage').prop('disabled', true)
+                        }
+                        else {
+                            $("#btnPrevPage").prop('disabled', false);
+                        }
+                        if (currentPage.isLast) {
+                            $("#btnNextPage").prop('disabled', true);
+                        }
+                        else {
+                            $("#btnNextPage").prop('disabled', false);
+                        }
+
+                        pageLi.innerHTML = "";
+                        var html = "<select onchange='search(this.value)' class='form-control' style='height: 100%'>";
+                        for (var i = 0; i < currentPage.totalPages; i++) {
+                            if (i == page) {
+                                html += "<option value='" + i + "' selected='selected'>" + i + "</option>";
+                            } else {
+                                html += "<option value='" + i + "' >" + i + "</option>";
+                            }
+                        }
+                        html += "</select>";
+                        pageLi.innerHTML = html;
+                        currentList = str.list;
+                        listing(str);
+                        if (status == 0) {
+                            console.log("device control succeeded");
                         }
                     }
-                    html += "</select>";
-                    pageLi.innerHTML = html;
-                    currentList = str.list;
-                    listing(str);
-                    if (status == 0) {
-                        console.log("device control succeeded");
+                },
+                error: function (data) {
+                    console.log("Device control failed" + data);
+                }
+            })
+        }
+
+        function listing(str) {
+            var myObject = str.list;
+            var mainContainer = document.getElementById('usersList');
+            var tempDiv = "";
+            var currentQuery = inputSearch.value.toUpperCase();
+
+
+            for (var i in myObject) {
+                var user = myObject[i];
+                var name = user.name;
+                var surname = user.surname;
+                var role = user.roles[0].role;
+                var enviroment = user.environment[0].environment_name;
+                var tc = user.tc;
+                var email = user.email;
+                var temp = "";
+                if (currentQuery != "" && (!name.includes(currentQuery) && !surname.includes(currentQuery))) {
+                    continue;
+                }
+
+                temp += '<div class="container userList" >';
+                temp += '<div class="col-sm-8 forUserInfo">';
+                temp += '<div class="container forNameAndAut">';
+                temp += '<div class="col-sm-4">' + name + ' ' + surname + '</div>';
+                temp += '<div class="col-sm-2" style="background-color: red;color: white;text-align: center">' + role + '</div>';
+                temp += '<div class="col-sm-6"></div> </div>';
+                temp += '<div class="container forInfo" style="font-size: 10px;font-style: italic">';
+                temp += '<div>' + tc + '</div>'; //T.C. gelecek
+                temp += '<div>' + email + '</div></div> ';   //Tel No gelecel
+                temp += '<div class="container keyInfo" >' + enviroment + '</div> </div>';
+                temp += '<div class="col-sm-4 forButtons">';
+                temp += '<div style="margin-top: 10px; margin-bottom: 5px;">';
+                temp += '<button type="button" class="btn btn-primary " style="margin-right: 5px; width: 70px;" onclick="editingModal(' + user.id + ')">EDIT</button>';
+                temp += '<button type="button" class="btn btn-primary " style="width: 70px; padding-left:7px;"  onclick="deleteModal(' + user.id + ')" >DELETE</button> </div >';
+                temp += '<div style="margin-top: 10px; margin-bottom: 5px;"><button type="button" class="btn btn-primary " style="width: 145px;" onclick="keyModal(' + user.id + ')">KEY MANAGMENT</button></div> </div> </div>';
+                tempDiv += temp;
+            }
+            usersList.innerHTML = tempDiv;
+        }
+
+        $(document).ready(function () {
+            $("#fixed-form-container .body").hide();
+            getPage(0);
+
+        })
+
+        function keyModal(id ) {
+            var user_id =id;
+            $("#keyModal").modal('show');
+            $.ajax({
+                url: "http://localhost:8080/admin/enviromentAPI",
+                contentType: 'application/json',
+                traditional: true,
+                dataType: 'json',
+                processData: false,
+                type: 'POST',
+                success: function (data) {
+                    var selectionObj = "";
+                    for (var i = 0; i < data.data.length; i++) {
+                        selectionObj += '<option value="' + data.data[i].environment_name + '">' + data.data[i].environment_name + '</option>';
                     }
+
+                    keyOption.innerHTML = selectionObj;
+
+
+                    var tempButtons = "";
+
+                    tempButtons += '<button type="button" class="btn btn-primary btn-sm" style="margin:5px"  onclick="prevContent()" id="prevContent" > << </button> </div >';
+                    tempButtons += '<button type="button" class="btn btn-primary btn-sm" style="margin:5px"  onclick="nextContent()" id="nextContent" > >> </button> </div >';
+
+                    forKeyButton.innerHTML = tempButtons;
+
+                    keySave.innerHTML= '<button type="button" class="btn btn-primary float-sm-right" style="margin:5px;width: 25%;"  onclick="saveEnviroment('+user_id, data.data[i].environment_id +')" > Save </button>';
+
+                },
+                error: function (data) {
+                    console.log("Device control failed" + data);
                 }
-            },
-            error: function (data) {
-                console.log("Device control failed" + data);
-            }
-        })
-    }
-
-
-    function listing(str) {
-        var myObject = str.list;
-        var mainContainer = document.getElementById('usersList');
-        var tempDiv = "";
-        var currentQuery = inputSearch.value.toUpperCase();
-
-
-        for (var i in myObject) {
-            var user = myObject[i];
-            var name = user.name;
-            var surname=user.surname;
-            var role = user.roles[0].role;
-            var enviroment = user.environment[0].environment_name;
-            var tc = user.tc;
-            var email = user.email;
-            var temp = "";
-            if (currentQuery != "" && (!name.includes(currentQuery) && !surname.includes(currentQuery))) {
-                continue;
-            }
-
-            temp += '<div class="container userList" >';
-            temp += '<div class="col-sm-8 forUserInfo">';
-            temp += '<div class="container forNameAndAut">';
-            temp += '<div class="col-sm-4">' + name +' '+surname+'</div>';
-            temp += '<div class="col-sm-2" style="background-color: red;color: white;text-align: center">' + role + '</div>';
-            temp += '<div class="col-sm-6"></div> </div>';
-            temp += '<div class="container forInfo" style="font-size: 10px;font-style: italic">';
-            temp += '<div>'+tc+'</div>'; //T.C. gelecek
-            temp += '<div>'+email+'</div></div> ';   //Tel No gelecel
-            temp += '<div class="container keyInfo" >' + enviroment + '</div> </div>';
-            temp += '<div class="col-sm-4 forButtons">';
-            temp += '<div style="margin-top: 10px; margin-bottom: 5px;">';
-            temp += '<button type="button" class="btn btn-primary " style="margin-right: 5px; width: 70px;" onclick="editingModal(' + user.id + ')">Düzenle</button>';
-            temp += '<button type="button" class="btn btn-primary " style="width: 70px;"  onclick="deleteModal(' + user.id + ')" >Sil</button> </div >';
-            temp += '<div style="margin-top: 10px; margin-bottom: 5px;"><button type="button" class="btn btn-primary " style="width: 145px;" onclick="keyModal(' + user.id + ')">Anahtar Yönetimi</button></div> </div> </div>';
-            tempDiv += temp;
+            })
         }
-        usersList.innerHTML = tempDiv;
-    }
 
-    $(document).ready(function () {
-        $("#fixed-form-container .body").hide();
-        getPage(0);
+        function saveEnviroment(id ,env_id ){
+            for (var i in currentList) {
+                var user = currentList[i];
+                var temp = "";
+                var userAndEnvId = {
+                    "user_id": id,
+                    "environment_id":env_id
+                };
+                if (user.id == id) {
 
-    })
+                    $.ajax({
+                        url: "http://localhost:8080/admin/enrollUserEnvironmentAPI",
+                        contentType: 'application/json',
+                        data:  JSON.stringify(userAndEnvId),
+                        traditional: true,
+                        dataType: 'json',
+                        processData: false,
+                        type: 'POST',
+                        success: function (data) {
+                            alert("oldu sehercim")
+                        },
+                        error: function (data) {
+                            console.log("Device control failed" + data);
+                        }
+                    })
 
-    function keyModal() {
-        $("#keyModal").modal('show');
-    }
-    function editingModal(id) {
-        $("#editModal").modal('show');
-        var divBodyandButton = document.getElementById("divBodyandButton");
-        var tempModal = "";
-        for (var i in currentList) {
-            var user = currentList[i];
-            var temp = "";
-            if (user.id == id) {
-                temp += '<div class="modal-body" id="editModalBody">';
-                temp += '<input class="form-control" id="nameEdit" placeholder="Name" type="text" value="' + user.name + '"/>';
-                temp += '<input class="form-control" id="lastNameEdit" placeholder="Surname" type="text" value="' + user.surname + '"/>';
-                temp += '<input class="form-control" id="emailEdit" placeholder="E-Mail" type="text" value="' + user.email + '"/>';
-                temp += '<input class="form-control" id="passwordEdit" placeholder="Password"/>';
-                temp += '<input class="form-control" id="passwordEdit2" placeholder="Password Verify" />';
-                temp += '<input class="form-control" id="role" placeholder="Role" type="text" value="' + user.roles[0].role + '"/>';
-                temp += '<input class="form-control" id="enviroment" placeholder="Environment" type="text" value="' + user.environment[0].environment_name + '"/>'; //Selection box gelecek
-                temp += '</div>';
-                temp += '<div class="modal-footer">';
-                temp += '<button type="button" id="editSave" onclick="editSave(' + user.id + ');" class="btn btn-primary">Save changes</button>';
-                temp += '<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>';
-                temp += '</div>';
-                tempModal += temp;
-            }
-        }
-        divBodyandButton.innerHTML = tempModal;
-        /*$("#editModal").modal().show();*/
-
-    }
-    function editSave(id) {
-        var user=[];
-        var name = nameEdit.value;
-        var lastName = lastNameEdit.value;
-        var email = emailEdit.value;
-        var password = passwordEdit.value;
-        var phone = editPhone.value;
-        $(".error").hide();
-        var hasError = false;
-        var errorType = "";
-        var checkVal = $("#passwordEdit2").val();
-        // if (passwordVal.length < 8 || passwordVal.length < 8) {
-        //     $("#password").after('<span class="error">Lütfen paralonızı 8 karakterdem fazla girin.</span>');
-        //     hasError = true;
-        // }
-        if (password != checkVal) {
-            $("#passwordEdit2").after('<span class="error">Parolanız eşleşmedi.</span>');
-            hasError = true;
-        }
-        user ={
-            id:id,
-            name:name,
-            lastName:lastName,
-            email:email,
-            password:password,
-            phone:phone
-        };
-        $.ajax({
-            url: "http://localhost:8080/guncelleAPI",
-            contentType: 'application/json',
-            traditional: true,
-            data:JSON.stringify(user),
-            dataType: 'json',
-            processData: false,
-            type: 'POST',
-            success: function (data) {
-                var status = data.status;
-                str = data.Objectdata;
-                if(data.successful ==true){
-                    $('#editModal').modal('toggle');
-                    $("#fixed-form-container .body").show();
-                    $(".popupCon").fadeToggle(3000);
-                    console.log("Kapatıldı");
-                    console.log(str);
                 }
-            },
-            error: function (data) {
-                console.log("Device control failed" + data);
+                else {
+                    alert("olmadı sehercim");
+                }
             }
-        })
-    }
 
-
-    $("select.selectPage").change(function(){
-        var selectedPage= $(this).children("option:selected").val();
-        getPage(selectedPage);
-    });
-    function deleteModal(id) {
-        var deleteModal = document.getElementById("deleteModal");
-    }
-
-    function previousPage() {
-        if (!currentPage.isFirst) {
-            search(currentPage.number - 1);
         }
-    }
+        function nextContent(){
+            $('#callbacks option:selected')
+                .remove().appendTo('#callbacks2');
 
-    function nextPage() {
-        if (!currentPage.isLast) {
-            search(currentPage.number + 1);
-        }
-    }
 
-    function search(page) {
-        page = (page == null) ? 0 : page;
-        getPage(page);
-    }
+        }
+        function prevContent(){
+            $('#callbacks2 option:selected')
+                .remove().appendTo('#callbacks');
 
-    function openUsersSet() {
-        var x = document.getElementById("userSetting");
-        if (x.style.display === "none") {
-            x.style.display = "block";
-            document.getElementById('roleSetting').style.display = "none";
-            document.getElementById('keySetting').style.display = "none";
-            document.getElementById('systemSetting').style.display = "none";
-        } else {
-            document.getElementById('roleSetting').style.display = "none";
-            document.getElementById('keySetting').style.display = "none";
-            document.getElementById('systemSetting').style.display = "none";
         }
-    }
-    function openRolesSet() {
-        var x = document.getElementById("roleSetting");
-        if (x.style.display === "none") {
-            x.style.display = "block";
-            document.getElementById('userSetting').style.display = "none";
-            document.getElementById('keySetting').style.display = "none";
-            document.getElementById('systemSetting').style.display = "none";
-        } else {
-            document.getElementById('userSetting').style.display = "none";
-            document.getElementById('keySetting').style.display = "none";
-            document.getElementById('systemSetting').style.display = "none";
-        }
-    }
-    function openKeysSet() {
-        var x = document.getElementById("keySetting");
-        if (x.style.display === "none") {
-            x.style.display = "block";
-            document.getElementById('roleSetting').style.display = "none";
-            document.getElementById('userSetting').style.display = "none";
-            document.getElementById('systemSetting').style.display = "none";
-        } else {
-            document.getElementById('roleSetting').style.display = "none";
-            document.getElementById('userSetting').style.display = "none";
-            document.getElementById('systemSetting').style.display = "none";
-        }
-    }
-    function openSysSet() {
-        var x = document.getElementById("systemSetting");
-        if (x.style.display === "none") {
-            x.style.display = "block";
-            document.getElementById('roleSetting').style.display = "none";
-            document.getElementById('keySetting').style.display = "none";
-            document.getElementById('userSetting').style.display = "none";
-        } else {
-            document.getElementById('roleSetting').style.display = "none";
-            document.getElementById('keySetting').style.display = "none";
-            document.getElementById('userSetting').style.display = "none";
-        }
-    }
+        function editingModal(id) {
+            $("#editModal").modal('show');
+            var divBodyandButton = document.getElementById("divBodyandButton");
+            var tempModal = "";
+            for (var i in currentList) {
+                var user = currentList[i];
+                var temp = "";
+                if (user.id == id) {
+                    temp += '<div class="modal-body" id="editModalBody">';
+                    temp += '<input class="form-control" id="nameEdit" placeholder="Name" type="text" value="' + user.name + '"/>';
+                    temp += '<input class="form-control" id="lastNameEdit" placeholder="Surname" type="text" value="' + user.surname + '"/>';
+                    temp += '<input class="form-control" id="emailEdit" placeholder="E-Mail" type="text" value="' + user.email + '"/>';
+                    temp += '<input class="form-control" id="passwordEdit" placeholder="Password"/>';
+                    temp += '<input class="form-control" id="passwordEdit2" placeholder="Password Verify" />';
+                    temp += '<input class="form-control" id="role" placeholder="Role" type="text" value="' + user.roles[0].role + '"/>';
+                    temp += '<input class="form-control" id="enviroment" placeholder="Environment" type="text" value="' + user.environment[0].environment_name + '"/>'; //Selection box gelecek
+                    temp += '</div>';
+                    temp += '<div class="modal-footer">';
+                    temp += '<button type="button" id="editSave" onclick="editSave(' + user.id + ');" class="btn btn-primary">Save changes</button>';
+                    temp += '<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>';
+                    temp += '</div>';
+                    tempModal += temp;
+                }
+            }
+            divBodyandButton.innerHTML = tempModal;
+            /*$("#editModal").modal().show();*/
 
-    var _gaq = _gaq || [];
-    _gaq.push(['_setAccount', 'UA-7243260-2']);
-    _gaq.push(['_trackPageview']);
-    (function () {
-        var ga = document.createElement('script');
-        ga.type = 'text/javascript';
-        ga.async = true;
-        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-        var s = document.getElementsByTagName('script')[0];
-        s.parentNode.insertBefore(ga, s);
-    });
-</script>
+        }
+
+        function editSave(id) {
+            var user = [];
+            var name = nameEdit.value;
+            var lastName = lastNameEdit.value;
+            var email = emailEdit.value;
+            var password = passwordEdit.value;
+            var phone = editPhone.value;
+            $(".error").hide();
+            var hasError = false;
+            var errorType = "";
+            var checkVal = $("#passwordEdit2").val();
+            // if (passwordVal.length < 8 || passwordVal.length < 8) {
+            //     $("#password").after('<span class="error">Lütfen paralonızı 8 karakterdem fazla girin.</span>');
+            //     hasError = true;
+            // }
+            if (password != checkVal) {
+                $("#passwordEdit2").after('<span class="error">Parolanız eşleşmedi.</span>');
+                hasError = true;
+            }
+            user = {
+                id: id,
+                name: name,
+                lastName: lastName,
+                email: email,
+                password: password,
+                phone: phone
+            };
+            $.ajax({
+                url: "http://localhost:8080/guncelleAPI",
+                contentType: 'application/json',
+                traditional: true,
+                data: JSON.stringify(user),
+                dataType: 'json',
+                processData: false,
+                type: 'POST',
+                success: function (data) {
+                    var status = data.status;
+                    str = data.Objectdata;
+                    if (data.successful == true) {
+                        $('#editModal').modal('toggle');
+                        $("#fixed-form-container .body").show();
+                        $(".popupCon").fadeToggle(3000);
+                        console.log("Kapatıldı");
+                        console.log(str);
+                    }
+                },
+                error: function (data) {
+                    console.log("Device control failed" + data);
+                }
+            })
+        }
+
+        $("select.selectPage").change(function () {
+            var selectedPage = $(this).children("option:selected").val();
+            getPage(selectedPage);
+        });
+
+        function deleteModal(id) {
+            var deleteModal = document.getElementById("deleteModal");
+        }
+
+        function previousPage() {
+            if (!currentPage.isFirst) {
+                search(currentPage.number - 1);
+            }
+        }
+
+        function nextPage() {
+            if (!currentPage.isLast) {
+                search(currentPage.number + 1);
+            }
+        }
+
+        function search(page) {
+            page = (page == null) ? 0 : page;
+            getPage(page);
+        }
+
+        function openUsersSet() {
+            var x = document.getElementById("userSetting");
+            if (x.style.display === "none") {
+                x.style.display = "block";
+                document.getElementById('roleSetting').style.display = "none";
+                document.getElementById('keySetting').style.display = "none";
+                document.getElementById('systemSetting').style.display = "none";
+            } else {
+                document.getElementById('roleSetting').style.display = "none";
+                document.getElementById('keySetting').style.display = "none";
+                document.getElementById('systemSetting').style.display = "none";
+            }
+        }
+
+        function openRolesSet() {
+            var x = document.getElementById("roleSetting");
+            if (x.style.display === "none") {
+                x.style.display = "block";
+                document.getElementById('userSetting').style.display = "none";
+                document.getElementById('keySetting').style.display = "none";
+                document.getElementById('systemSetting').style.display = "none";
+            } else {
+                document.getElementById('userSetting').style.display = "none";
+                document.getElementById('keySetting').style.display = "none";
+                document.getElementById('systemSetting').style.display = "none";
+            }
+        }
+
+        function openKeysSet() {
+            var x = document.getElementById("keySetting");
+            if (x.style.display === "none") {
+                x.style.display = "block";
+                document.getElementById('roleSetting').style.display = "none";
+                document.getElementById('userSetting').style.display = "none";
+                document.getElementById('systemSetting').style.display = "none";
+            } else {
+                document.getElementById('roleSetting').style.display = "none";
+                document.getElementById('userSetting').style.display = "none";
+                document.getElementById('systemSetting').style.display = "none";
+            }
+        }
+
+        function openSysSet() {
+            var x = document.getElementById("systemSetting");
+            if (x.style.display === "none") {
+                x.style.display = "block";
+                document.getElementById('roleSetting').style.display = "none";
+                document.getElementById('keySetting').style.display = "none";
+                document.getElementById('userSetting').style.display = "none";
+            } else {
+                document.getElementById('roleSetting').style.display = "none";
+                document.getElementById('keySetting').style.display = "none";
+                document.getElementById('userSetting').style.display = "none";
+            }
+        }
+
+        var _gaq = _gaq || [];
+        _gaq.push(['_setAccount', 'UA-7243260-2']);
+        _gaq.push(['_trackPageview']);
+        (function () {
+            var ga = document.createElement('script');
+            ga.type = 'text/javascript';
+            ga.async = true;
+            ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+            var s = document.getElementsByTagName('script')[0];
+            s.parentNode.insertBefore(ga, s);
+        });
+
+    </script>
+</div>
 </body>
 </html>
