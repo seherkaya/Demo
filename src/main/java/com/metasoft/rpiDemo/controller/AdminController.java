@@ -1,15 +1,20 @@
 package com.metasoft.rpiDemo.controller;
 
 import com.google.gson.Gson;
+import com.metasoft.rpiDemo.model.EnvironmentList;
 import com.metasoft.rpiDemo.service.EnvironmentService;
 import com.metasoft.rpiDemo.service.EnvironmentServiceImpl;
 import com.metasoft.rpiDemo.service.UserServiceImpl;
+import org.omg.CORBA.Environment;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import java.awt.*;
 import java.lang.reflect.Array;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
 
 @Controller
 @RequestMapping(value = "/admin")
@@ -36,6 +41,7 @@ public class AdminController {
         return new Gson().toJson( userServiceImpl.searchAll( name,pageNo ) );
     }
 
+    @ResponseBody
     @RequestMapping(value = "/enviromentAPI", method = RequestMethod.POST)
     public String returnEnviroment()  throws Exception {
         return new Gson().toJson( environmentServiceImpl.searchEnvironmetActive( 0 ));
@@ -43,10 +49,10 @@ public class AdminController {
 
     @ResponseBody //This annotation provides to return String from method
     @RequestMapping(value = "/enrollUserEnvironmentAPI", method = RequestMethod.POST)
-    public String returnEnrollUserEnvironment(@RequestParam(required = true, value = "user_id") int user_id,
-                                              @RequestParam( required = true, value = "environment_id") int environment_id){
+    public String returnEnrollUserEnvironment(@RequestParam (required =true,value = "user_id") int user_id ,
+                                              @RequestBody  EnvironmentList environmentList){
 
 
-        return new Gson().toJson( userServiceImpl.enrollEnvironment(user_id, environment_id));
+        return new Gson().toJson( userServiceImpl.enrollEnvironment(user_id, environmentList));
     }
 }

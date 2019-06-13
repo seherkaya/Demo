@@ -21,16 +21,16 @@ public class User {
     private int id;
 
     @Column(name = "user_name")
-    private String name;
+    private String userName;
 
     @Column(name = "user_surname")
-    private String surname;
+    private String userSurname;
 
     @Column(name = "user_email")
-    private String email;
+    private String userEmail;
 
     @Column(name = "user_password")
-    private String password;
+    private String userPassword;
 
 //    @Column(name = "user_birth_date")
 //    private Date birthDate;
@@ -57,28 +57,38 @@ public class User {
         this.id = id;
     }
 
-    public String getName() { return name; }
 
-    public void setName(String name) {
-        this.name = name;
+    public String getUserName() {
+        return userName;
     }
 
-    public String getSurname() {
-        return surname;
+    public void setUserName(String userName) {
+        this.userName = userName;
     }
 
-    public void setSurname(String surname) {
-        this.surname = surname;
+    public String getUserSurname() {
+        return userSurname;
     }
 
-    public String getEmail() {        return email; }
+    public void setUserSurname(String userSurname) {
+        this.userSurname = userSurname;
+    }
 
-    public void setEmail(String email) { this.email = email; }
+    public String getUserEmail() {
+        return userEmail;
+    }
 
-    public String getPassword() { return password; }
+    public void setUserEmail(String userEmail) {
+        this.userEmail = userEmail;
+    }
 
-    public void setPassword(String password) { this.password = password;}
+    public String getUserPassword() {
+        return userPassword;
+    }
 
+    public void setUserPassword(String userPassword) {
+        this.userPassword = userPassword;
+    }
 
     public Integer getTc() { return tc; }
 

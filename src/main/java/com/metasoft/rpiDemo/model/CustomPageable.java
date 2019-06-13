@@ -13,6 +13,7 @@ public class CustomPageable {
     private int totalPages;
     private long totalElements;
     private List<Object> list;
+    private List<Object> allElements;
 
     public CustomPageable(Page page) {
         list = new LinkedList<>(page.getContent());
@@ -21,6 +22,7 @@ public class CustomPageable {
         isFirst = page.isFirst();
         isLast = page.isLast();
         number = page.getNumber();
+        allElements = page.getContent();
     }
 
     public boolean isFirst() {

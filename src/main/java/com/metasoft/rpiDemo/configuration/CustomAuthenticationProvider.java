@@ -23,7 +23,7 @@ public class CustomAuthenticationProvider implements AuthenticationProvider {
         String password = authentication.getCredentials().toString();
 
 
-        User user = userRepository.findByEmail(name);
+        User user = userRepository.findByUserEmail(name);
 
         if (user.getActive()!=1) {
 

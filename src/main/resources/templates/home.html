@@ -265,21 +265,25 @@
                         <div id="divBodyandKey">
                             <div class="row">
                                 <div class="col-sm-12">
-                                    <div class="col-sm-5">
-                                        <select class="form-control" id='callbacks' multiple='multiple' style="width: 100%">
+                                    <div id='allEnvironments' class="col-sm-5">
 
-                                        </select>
                                     </div>
                                     <div class="col-sm-2" id="forKeyButton">
+                                        <button type="button" class="btn btn-primary btn-sm" style="margin:5px"
+                                                onclick="prevContent(id)" id="prevContent"> <<
+                                        </button>
+                                        <button type="button" class="btn btn-primary btn-sm" style="margin:5px"
+                                                onclick="nextContent(id)" id="nextContent"> >>
+                                        </button>
 
                                     </div>
-                                    <div class="col-sm-5">
-                                        <select class="form-control" id='callbacks2' multiple='multiple' style="width: 100%">
+                                    <div id="selectedEnvironments" class="col-sm-5">
 
-                                        </select>
                                     </div>
                                     <div id="keySave">
-
+                                        <button type="button" class="btn btn-primary float-sm-right"
+                                                style="margin:5px;width: 25%;" onclick="saveEnviroment()"> Save
+                                        </button>
                                     </div>
 
                                 </div>
@@ -296,7 +300,7 @@
                         <div class="form-group has-search">
                             <span class="fa fa-search form-control-feedback"></span>
                             <input type="text" id="inputSearch" class="form-control" placeholder="Search"
-                                   onkeyup="listing(str)">
+                                   onkeyup="searching()">
                         </div>
                         <!-- Kullanıcı listeler-->
                         <div class="bs-example">
@@ -417,19 +421,16 @@
                     <option value='elem_100'>elem 100</option>
         */
 
-        var name = "";
-        var str = "";
-        var totalPages;
+        var str = null;
         var currentPage;
         var currentList = [];
         var pageLi = document.getElementById('pageNumber');
-        var tempLi = "";
-        var totalPage = "";
-        var keyOption = document.getElementById('callbacks');
-        var forKeyButton = document.getElementById('forKeyButton');
-        var keyOption2 = document.getElementById('callbacks2');
-        var keySave =document.getElementById('keySave');
-
+        var totalPage = null;
+        var allEnvironments = null;
+        var selectedEnvironments = [];
+        var environmentSelectModalCurrentUser = null;
+        var searchingValue =null;
+        var selectedPage =null;
 
         function getPage(page, name) {
             console.log("getPage:" + page);
@@ -465,7 +466,7 @@
                         }
 
                         pageLi.innerHTML = "";
-                        var html = "<select onchange='search(this.value)' class='form-control' style='height: 100%'>";
+                        var html = '<select id ="selectPage" onchange="search(this.value)" class="form-control" style="height: 100%">';
                         for (var i = 0; i < currentPage.totalPages; i++) {
                             if (i == page) {
                                 html += "<option value='" + i + "' selected='selected'>" + i + "</option>";
@@ -487,14 +488,23 @@
                 }
             })
         }
+        function searching(){
+            var tmpSelectTag=document.getElementById("selectPage");
+            selectedPage = tmpSelectTag.options[tmpSelectTag.selectedIndex].value;
+
+            searchingValue=inputSearch.value.toUpperCase();
+
+            getPage(selectedPage,searchingValue);
+
+        }
 
         function listing(str) {
             var myObject = str.list;
             var mainContainer = document.getElementById('usersList');
             var tempDiv = "";
+/*
             var currentQuery = inputSearch.value.toUpperCase();
-
-
+*/
             for (var i in myObject) {
                 var user = myObject[i];
                 var name = user.name;
@@ -504,9 +514,9 @@
                 var tc = user.tc;
                 var email = user.email;
                 var temp = "";
-                if (currentQuery != "" && (!name.includes(currentQuery) && !surname.includes(currentQuery))) {
+                /*if (currentQuery != "" && (!name.includes(currentQuery) && !surname.includes(currentQuery))) {
                     continue;
-                }
+                }*/
 
                 temp += '<div class="container userList" >';
                 temp += '<div class="col-sm-8 forUserInfo">';
@@ -534,9 +544,83 @@
 
         })
 
-        function keyModal(id ) {
-            var user_id =id;
-            $("#keyModal").modal('show');
+        function toggleModalEnvironmentSelection(environmentId) {
+            var environment = null;
+            for (var i in allEnvironments) {
+                var temp = allEnvironments[i];
+                if (temp.id == environmentId) {
+                    environment = temp;
+                    break;
+                }
+            }
+            if (environment == null) {
+                return;
+            }
+            var index = selectedEnvironments.indexOf(environment);
+            if (index != -1) {
+                var newArray = [];
+                for (var i in selectedEnvironments) {
+                    var tmp = selectedEnvironments[i];
+                    if (tmp.id != environmentId) {
+                        newArray.push(tmp);
+                    }
+                }
+
+                selectedEnvironments = newArray;
+
+            } else {
+                selectedEnvironments.push(environment);
+            }
+
+            renderEnvironmentModal();
+        }
+
+        function renderEnvironmentModal() {
+            if (allEnvironments == null) {
+                return;
+            }
+            var allEnvironmentsDiv = document.getElementById("allEnvironments");
+            var selectedEnvironmentsDiv = document.getElementById("selectedEnvironments");
+
+            allEnvironmentsDiv.innerHTML = "";
+            selectedEnvironmentsDiv.innerHTML = "";
+
+            var temp = "";
+            for (var i in selectedEnvironments) {
+                var environment = selectedEnvironments[i];
+                temp += "<div onclick='toggleModalEnvironmentSelection(" + environment.id + ")'>";
+                temp += environment.environment_name;
+                temp += "</div>";
+            }
+            selectedEnvironmentsDiv.innerHTML = temp;
+
+            temp = "";
+            for (var i in allEnvironments) {
+                var environment = allEnvironments[i];
+                var isThisAlreadySelected = false;
+
+                for (var k in selectedEnvironments) {
+                    var tempSelected = selectedEnvironments[k];
+                    if (tempSelected.id == environment.id) {
+                        isThisAlreadySelected = true;
+                        break;
+                    }
+                }
+
+                if (isThisAlreadySelected) {
+                    continue;
+                }
+
+                temp += "<div onclick='toggleModalEnvironmentSelection(" + environment.id + ")'>";
+                temp += environment.environment_name;
+                temp += "</div>";
+            }
+
+            allEnvironmentsDiv.innerHTML = temp;
+
+        }
+
+        function getAllEnvironments() {
             $.ajax({
                 url: "http://localhost:8080/admin/enviromentAPI",
                 contentType: 'application/json',
@@ -545,23 +629,9 @@
                 processData: false,
                 type: 'POST',
                 success: function (data) {
-                    var selectionObj = "";
-                    for (var i = 0; i < data.data.length; i++) {
-                        selectionObj += '<option value="' + data.data[i].environment_name + '">' + data.data[i].environment_name + '</option>';
-                    }
-
-                    keyOption.innerHTML = selectionObj;
-
-
-                    var tempButtons = "";
-
-                    tempButtons += '<button type="button" class="btn btn-primary btn-sm" style="margin:5px"  onclick="prevContent()" id="prevContent" > << </button> </div >';
-                    tempButtons += '<button type="button" class="btn btn-primary btn-sm" style="margin:5px"  onclick="nextContent()" id="nextContent" > >> </button> </div >';
-
-                    forKeyButton.innerHTML = tempButtons;
-
-                    keySave.innerHTML= '<button type="button" class="btn btn-primary float-sm-right" style="margin:5px;width: 25%;"  onclick="saveEnviroment('+user_id, data.data[i].environment_id +')" > Save </button>';
-
+                    var list = data.data;
+                    allEnvironments = list;
+                    renderEnvironmentModal();
                 },
                 error: function (data) {
                     console.log("Device control failed" + data);
@@ -569,20 +639,25 @@
             })
         }
 
-        function saveEnviroment(id ,env_id ){
-            for (var i in currentList) {
-                var user = currentList[i];
-                var temp = "";
-                var userAndEnvId = {
-                    "user_id": id,
-                    "environment_id":env_id
-                };
-                if (user.id == id) {
+        function keyModal(id) {
+            environmentSelectModalCurrentUser = id;
 
-                    $.ajax({
-                        url: "http://localhost:8080/admin/enrollUserEnvironmentAPI",
+            if (allEnvironments == null) {
+                getAllEnvironments();
+            }
+
+            $("#keyModal").modal('show');
+
+        }
+
+        function saveEnviroment() {
+            if (environmentSelectModalCurrentUser == null) {
+                return;
+            }
+            $.ajax({
+                url: "http://localhost:8080/admin/enrollUserEnvironmentAPI?user_id=" + environmentSelectModalCurrentUser,
                         contentType: 'application/json',
-                        data:  JSON.stringify(userAndEnvId),
+                data: JSON.stringify({env: selectedEnvironments}),
                         traditional: true,
                         dataType: 'json',
                         processData: false,
@@ -593,26 +668,10 @@
                         error: function (data) {
                             console.log("Device control failed" + data);
                         }
-                    })
+            });
 
-                }
-                else {
-                    alert("olmadı sehercim");
-                }
             }
 
-        }
-        function nextContent(){
-            $('#callbacks option:selected')
-                .remove().appendTo('#callbacks2');
-
-
-        }
-        function prevContent(){
-            $('#callbacks2 option:selected')
-                .remove().appendTo('#callbacks');
-
-        }
         function editingModal(id) {
             $("#editModal").modal('show');
             var divBodyandButton = document.getElementById("divBodyandButton");
@@ -695,7 +754,7 @@
         }
 
         $("select.selectPage").change(function () {
-            var selectedPage = $(this).children("option:selected").val();
+            selectedPage = $("#select").children("option:selected").val();
             getPage(selectedPage);
         });
 

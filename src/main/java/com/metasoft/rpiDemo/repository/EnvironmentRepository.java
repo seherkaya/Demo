@@ -8,6 +8,7 @@ import java.util.List;
 public interface EnvironmentRepository extends JpaRepository<Environment,Integer> {
 
    List<Environment> findAllByActive(Integer active);
+   List<Environment> findAllById(List<Environment> envArray);
 
    Environment findById(int id);
 }
