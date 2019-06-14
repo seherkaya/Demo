@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Anasayfa</title>
+    <title>HOME</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
@@ -221,7 +221,7 @@
         </nav>
         <!--Finish navbar-->
     </div>
-    <div class="row" id="userSetting" style="display: none">
+    <div class="row" id="userSetting">
         <div class="col-sm-12">
             <div class="modal fade" id="editModal" role="dialog">
                 <div class="modal-dialog">
@@ -846,9 +846,9 @@
 
         function openRolesSet() {
 
-            window.location.href = "http://localhost:8080/role";
+            window.location.href = "http://localhost:8080/admin/role";
 
-            var x = document.getElementById("roleSetting");
+          /*  var x = document.getElementById("roleSetting");
             if (x.style.display === "none") {
                 x.style.display = "block";
                 document.getElementById('userSetting').style.display = "none";
@@ -858,14 +858,14 @@
                 document.getElementById('userSetting').style.display = "none";
                 document.getElementById('keySetting').style.display = "none";
                 document.getElementById('systemSetting').style.display = "none";
-            }
+            }*/
         }
 
         function openKeysSet() {
-            window.location.href = "http://localhost:8080/key";
+            window.location.href = "http://localhost:8080/admin/key";
 
-            var x = document.getElementById("keySetting");
-            if (x.style.display === "none") {
+            /* var x = document.getElementById("keySetting");
+           if (x.style.display === "none") {
                 x.style.display = "block";
                 document.getElementById('roleSetting').style.display = "none";
                 document.getElementById('userSetting').style.display = "none";
@@ -874,12 +874,12 @@
                 document.getElementById('roleSetting').style.display = "none";
                 document.getElementById('userSetting').style.display = "none";
                 document.getElementById('systemSetting').style.display = "none";
-            }
+            }*/
         }
 
         function openSysSet() {
-            window.location.href = "http://localhost:8080/system";
-            var x = document.getElementById("systemSetting");
+            window.location.href = "http://localhost:8080/admin/system";
+            /*var x = document.getElementById("systemSetting");
             if (x.style.display === "none") {
                 x.style.display = "block";
                 document.getElementById('roleSetting').style.display = "none";
@@ -889,7 +889,7 @@
                 document.getElementById('roleSetting').style.display = "none";
                 document.getElementById('keySetting').style.display = "none";
                 document.getElementById('userSetting').style.display = "none";
-            }
+            }*/
         }
 
         var _gaq = _gaq || [];

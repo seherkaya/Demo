@@ -72,7 +72,17 @@ public class AdminController {
     @RequestMapping(value = "/updateUserAPI", method = RequestMethod.POST)
     public String updateUser(@RequestBody User user){
 
-
         return new Gson().toJson( userServiceImpl.updateUser(user));
     }
+
+
+    @RequestMapping(value = "/role", method = RequestMethod.GET)
+    public String role(){ return "role"; }
+
+
+    @RequestMapping(value = "/key", method = RequestMethod.GET)
+    public String key(){  return "key";    }
+
+    @RequestMapping(value = "/system", method = RequestMethod.GET)
+    public String system(){ return "system";    }
 }
