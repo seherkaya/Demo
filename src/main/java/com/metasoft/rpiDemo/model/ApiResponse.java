@@ -42,9 +42,7 @@ public class ApiResponse {
         return successful;
     }
 
-    public void setSuccessful(Boolean successful) {
-        this.successful = successful;
-    }
+    public void setSuccessful(Boolean successful) { this.successful = successful; }
 
     public Integer getMessageCode() {
         return messageCode;
@@ -98,9 +96,7 @@ public class ApiResponse {
         return data;
     }
 
-    public void setData(Object data) {
-        this.data = data;
-    }
+    public void setData(Object data) { this.data = data; }
 
     //endregion
 

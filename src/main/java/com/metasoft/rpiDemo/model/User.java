@@ -43,7 +43,7 @@ public class User {
 
     @ManyToMany(cascade = CascadeType.ALL)
     @JoinTable(name = "user_role", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "role_id"))
-    private Set<Role> roles;
+    private Set<Role> userRoles;
 
     @ManyToMany(cascade = CascadeType.ALL)
     @JoinTable(name = "user_environment", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "environment_id"))
@@ -99,9 +99,9 @@ public class User {
     public void setActive(Integer active) { this.active = active; }
 
 
-    public Set<Role> getRoles() { return roles; }
+    public Set<Role> getRoles() { return userRoles; }
 
-    public void setRoles(Set<Role> roles) { this.roles = roles; }
+    public void setRoles(Set<Role> roles) { this.userRoles = roles; }
 
     public Set<Environment> getEnvironment() { return environment; }
 

@@ -160,7 +160,18 @@
         width: auto;
         padding: 0px;
     }
-
+    .selectpicker  {
+        width: 100%;
+        height: 30px;
+        margin: 1px;}
+    .keybuttonSave {
+        margin: 5px;
+        position: fixed;
+        bottom: 0px;
+        height: 50px;
+        padding: 15px;
+        right: 0px;
+    }
 </style>
 <body>
 <div class="bodyDiv">
@@ -255,7 +266,7 @@
             </div>
             <div class="modal fade" id="keyModal" role="dialog">
                 <div class="modal-dialog modal-lg">
-                    <div class="modal-content" style="padding: 15px;">
+                    <div class="modal-content" style="padding: 15px;height: 500px;">
                         <div class="modal-header">
                             <h5 class="modal-title"><b>KEY MANAGMENT</b></h5>
                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -265,23 +276,19 @@
                         <div id="divBodyandKey">
                             <div class="row">
                                 <div class="col-sm-12">
-                                    <div id='allEnvironments' class="col-sm-5">
+                                    <div id='allEnvironments' class="col-sm-5" style=" background-color: white; border: 2px solid #D3D3D3; border-radius: 8px; height: 100%;">
 
                                     </div>
-                                    <div class="col-sm-2" id="forKeyButton">
-                                        <button type="button" class="btn btn-primary btn-sm" style="margin:5px"
-                                                onclick="prevContent(id)" id="prevContent"> <<
-                                        </button>
-                                        <button type="button" class="btn btn-primary btn-sm" style="margin:5px"
-                                                onclick="nextContent(id)" id="nextContent"> >>
-                                        </button>
+                                    <div class="col-sm-2" id="forKeyButton" style="padding-top: 20%;padding-bottom: 20%;">
+                                        <div style="text-align: center; background-color: white; border: 2px solid #D3D3D3; border-radius: 8px;"> <<  >> </div>
+
 
                                     </div>
-                                    <div id="selectedEnvironments" class="col-sm-5">
+                                    <div id="selectedEnvironments" class="col-sm-5" style=" background-color: white; border: 2px solid #D3D3D3; border-radius: 8px; height: 100%;">
 
                                     </div>
                                     <div id="keySave">
-                                        <button type="button" class="btn btn-primary float-sm-right"
+                                        <button type="button" class="btn btn-primary float-sm-right keybuttonSave"
                                                 style="margin:5px;width: 25%;" onclick="saveEnviroment()"> Save
                                         </button>
                                     </div>
@@ -427,10 +434,12 @@
         var pageLi = document.getElementById('pageNumber');
         var totalPage = null;
         var allEnvironments = null;
+        var allRoles =null;
         var selectedEnvironments = [];
         var environmentSelectModalCurrentUser = null;
         var searchingValue =null;
         var selectedPage =null;
+        var selectedRole=[];
 
         function getPage(page, name) {
             console.log("getPage:" + page);
@@ -467,6 +476,7 @@
 
                         pageLi.innerHTML = "";
                         var html = '<select id ="selectPage" onchange="search(this.value)" class="form-control" style="height: 100%">';
+                        if(currentPage.totalPages ==0 ){currentPage.totalPages=1;}
                         for (var i = 0; i < currentPage.totalPages; i++) {
                             if (i == page) {
                                 html += "<option value='" + i + "' selected='selected'>" + i + "</option>";
@@ -488,6 +498,7 @@
                 }
             })
         }
+
         function searching(){
             var tmpSelectTag=document.getElementById("selectPage");
             selectedPage = tmpSelectTag.options[tmpSelectTag.selectedIndex].value;
@@ -507,12 +518,12 @@
 */
             for (var i in myObject) {
                 var user = myObject[i];
-                var name = user.name;
-                var surname = user.surname;
-                var role = user.roles[0].role;
-                var enviroment = user.environment[0].environment_name;
+                var name = user.userName;
+                var surname = user.userSurname;
+                var role = user.userRoles[0].role;
+                var enviroment = user.environment[0].environmentName;
                 var tc = user.tc;
-                var email = user.email;
+                var email = user.userEmail;
                 var temp = "";
                 /*if (currentQuery != "" && (!name.includes(currentQuery) && !surname.includes(currentQuery))) {
                     continue;
@@ -541,6 +552,8 @@
         $(document).ready(function () {
             $("#fixed-form-container .body").hide();
             getPage(0);
+            getAllEnvironments();
+            getAllRoles();
 
         })
 
@@ -589,7 +602,7 @@
             for (var i in selectedEnvironments) {
                 var environment = selectedEnvironments[i];
                 temp += "<div onclick='toggleModalEnvironmentSelection(" + environment.id + ")'>";
-                temp += environment.environment_name;
+                temp += environment.environmentName;
                 temp += "</div>";
             }
             selectedEnvironmentsDiv.innerHTML = temp;
@@ -612,7 +625,7 @@
                 }
 
                 temp += "<div onclick='toggleModalEnvironmentSelection(" + environment.id + ")'>";
-                temp += environment.environment_name;
+                temp += environment.environmentName;
                 temp += "</div>";
             }
 
@@ -637,6 +650,26 @@
                     console.log("Device control failed" + data);
                 }
             })
+        }
+
+        function getAllRoles() {
+            $.ajax({
+                url: "http://localhost:8080/admin/rolesAPI",
+                contentType: 'application/json',
+                traditional: true,
+                dataType: 'json',
+                processData: false,
+                type: 'POST',
+                success: function (data) {
+                    var list = data.data;
+                    allRoles = list;
+                },
+                error: function (data) {
+                    console.log("Device control failed" + data);
+                }
+            })
+
+
         }
 
         function keyModal(id) {
@@ -681,13 +714,23 @@
                 var temp = "";
                 if (user.id == id) {
                     temp += '<div class="modal-body" id="editModalBody">';
-                    temp += '<input class="form-control" id="nameEdit" placeholder="Name" type="text" value="' + user.name + '"/>';
-                    temp += '<input class="form-control" id="lastNameEdit" placeholder="Surname" type="text" value="' + user.surname + '"/>';
-                    temp += '<input class="form-control" id="emailEdit" placeholder="E-Mail" type="text" value="' + user.email + '"/>';
+                    temp += '<input class="form-control" id="nameEdit" placeholder="Name" type="text" value="' + user.userName + '"/>';
+                    temp += '<input class="form-control" id="lastNameEdit" placeholder="Surname" type="text" value="' + user.userSurname + '"/>';
+                    temp += '<input class="form-control" id="emailEdit" placeholder="E-Mail" type="text" value="' + user.userEmail + '"/>';
                     temp += '<input class="form-control" id="passwordEdit" placeholder="Password"/>';
                     temp += '<input class="form-control" id="passwordEdit2" placeholder="Password Verify" />';
-                    temp += '<input class="form-control" id="role" placeholder="Role" type="text" value="' + user.roles[0].role + '"/>';
-                    temp += '<input class="form-control" id="enviroment" placeholder="Environment" type="text" value="' + user.environment[0].environment_name + '"/>'; //Selection box gelecek
+                    temp += '<select class="selectpicker" id="roleEdit">';
+                    for (var i in allRoles){
+                        temp += '<option style= class="form-control"  placeholder="Role" type="text" value="' + allRoles[i]+ '">'+ allRoles[i].role +'</option>'; //Selection box gelecek
+
+                    }
+/*
+                    temp += '<input class="form-control" id="roleEdit" placeholder="Role" type="text" value="' + user.roles[0].role + '"/>'; //Selection box gelecek
+*/
+
+
+
+                    temp += '<input class="form-control" id="tcEdit" placeholder="TC" type="text" value="' + user.tc + '"/>';
                     temp += '</div>';
                     temp += '<div class="modal-footer">';
                     temp += '<button type="button" id="editSave" onclick="editSave(' + user.id + ');" class="btn btn-primary">Save changes</button>';
@@ -701,13 +744,19 @@
 
         }
 
+
+
         function editSave(id) {
+            var selectedRoleIndex= roleEdit.selectedIndex;
+            selectedRole=allRoles[selectedRoleIndex];
             var user = [];
             var name = nameEdit.value;
-            var lastName = lastNameEdit.value;
+            var surname = lastNameEdit.value;
             var email = emailEdit.value;
             var password = passwordEdit.value;
-            var phone = editPhone.value;
+            var tc = tcEdit.value;
+            var roles =[];
+            roles=selectedRole;
             $(".error").hide();
             var hasError = false;
             var errorType = "";
@@ -722,14 +771,14 @@
             }
             user = {
                 id: id,
-                name: name,
-                lastName: lastName,
-                email: email,
-                password: password,
-                phone: phone
+                userName: name,
+                userSurname: surname,
+                userEmail : email,
+                userRoles:roles,
+                tc: tc
             };
             $.ajax({
-                url: "http://localhost:8080/guncelleAPI",
+                url: "http://localhost:8080/admin/updateUserAPI",
                 contentType: 'application/json',
                 traditional: true,
                 data: JSON.stringify(user),

@@ -71,7 +71,7 @@ public class UserServiceImpl implements UserService {
         CustomPageable cs ;
         if (name != null) {
 
-            cs= new CustomPageable(userRepository.findByUserName( name, PageRequest.of( pageNo,2) ));
+            cs= new CustomPageable(userRepository.findByUserNameContaining( name, PageRequest.of( pageNo,2) ));
             if(cs== null){
                 pageNo=pageNo-1;
             }
@@ -154,6 +154,49 @@ public class UserServiceImpl implements UserService {
         response.setMessageText( "Not founded" );
 
         return response;
+    }
+
+    @Override
+    public ApiResponse updateUser(User user){
+        ApiResponse response = new ApiResponse();
+        User existingUser = userRepository.findById( user.getId() );
+
+        if (existingUser !=null){
+
+            if (user.getUserName() != null)
+                existingUser.setUserName( user.getUserName() );
+            if (user.getUserSurname() != null)
+                existingUser.setUserSurname( user.getUserSurname() );
+            if (user.getUserEmail() != null){
+                /*if (!SystemGeneral.validateEmail( user.getEmail() )) {
+                    response.setSuccessful( false );
+                    response.setMessage( "Email is not valid" );
+                    return response;
+                }*/
+            }
+            existingUser.setUserEmail( user.getUserEmail() );
+            if (user.getUserPassword() != null)
+                existingUser.setUserPassword(/* bCryptPasswordEncoder.encode(*/user.getUserPassword()/*)*/);
+            if (user.getTc() != null)
+                existingUser.setTc( user.getTc() );
+            if (user.getActive() != 1 || user.getActive() != 0)
+                existingUser.setActive( user.getActive() );
+            if(user.getRoles()!=null){
+                /*Role userRole =  roleRepository.findByRole( user.getRoles() );*/
+                /*existingUser.setRoles( new HashSet<Role>( Arrays.asList( user.getRoles() ) ) );*/
+            }
+
+            User kaydedilen = userRepository.save( existingUser );
+            response.setSuccessful( true );
+            response.setData( kaydedilen );
+            return response;
+        } else {
+            response.setSuccessful( false );
+            response.setMessageText( "This User not founded" );
+
+            return response;
+        }
+
     }
 
 }

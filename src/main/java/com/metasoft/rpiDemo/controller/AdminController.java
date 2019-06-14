@@ -2,8 +2,10 @@ package com.metasoft.rpiDemo.controller;
 
 import com.google.gson.Gson;
 import com.metasoft.rpiDemo.model.EnvironmentList;
+import com.metasoft.rpiDemo.model.User;
 import com.metasoft.rpiDemo.service.EnvironmentService;
 import com.metasoft.rpiDemo.service.EnvironmentServiceImpl;
+import com.metasoft.rpiDemo.service.RoleServiceImpl;
 import com.metasoft.rpiDemo.service.UserServiceImpl;
 import org.omg.CORBA.Environment;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,8 +24,12 @@ public class AdminController {
 
     @Autowired
     private UserServiceImpl userServiceImpl;
+
     @Autowired
     private EnvironmentServiceImpl environmentServiceImpl;
+
+    @Autowired
+    private RoleServiceImpl roleServiceImpl;
 
 
     @RequestMapping(value = "/home", method = RequestMethod.GET)
@@ -47,6 +53,12 @@ public class AdminController {
         return new Gson().toJson( environmentServiceImpl.searchEnvironmetActive( 0 ));
     }
 
+    @ResponseBody
+    @RequestMapping(value = "/rolesAPI", method = RequestMethod.POST)
+    public String returnRole()  throws Exception {
+        return new Gson().toJson( roleServiceImpl.allRoles( ));
+    }
+
     @ResponseBody //This annotation provides to return String from method
     @RequestMapping(value = "/enrollUserEnvironmentAPI", method = RequestMethod.POST)
     public String returnEnrollUserEnvironment(@RequestParam (required =true,value = "user_id") int user_id ,
@@ -54,5 +66,13 @@ public class AdminController {
 
 
         return new Gson().toJson( userServiceImpl.enrollEnvironment(user_id, environmentList));
+    }
+
+    @ResponseBody //This annotation provides to return String from method
+    @RequestMapping(value = "/updateUserAPI", method = RequestMethod.POST)
+    public String updateUser(@RequestBody User user){
+
+
+        return new Gson().toJson( userServiceImpl.updateUser(user));
     }
 }

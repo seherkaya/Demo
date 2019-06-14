@@ -18,4 +18,6 @@ public interface UserService {
 
     ApiResponse enrollEnvironment(int user_id, EnvironmentList myArray);
 
+    ApiResponse updateUser(User user);
+
 }
