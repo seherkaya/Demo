@@ -179,11 +179,17 @@ public class UserServiceImpl implements UserService {
                 existingUser.setUserPassword(/* bCryptPasswordEncoder.encode(*/user.getUserPassword()/*)*/);
             if (user.getTc() != null)
                 existingUser.setTc( user.getTc() );
-            if (user.getActive() != 1 || user.getActive() != 0)
-                existingUser.setActive( user.getActive() );
+            /*if (user.getActive() != 1 || user.getActive() != 0)
+                existingUser.setActive( user.getActive() );*/
             if(user.getRoles()!=null){
-                /*Role userRole =  roleRepository.findByRole( user.getRoles() );*/
-                /*existingUser.setRoles( new HashSet<Role>( Arrays.asList( user.getRoles() ) ) );*/
+
+                existingUser.setUserRoles(user.getUserRoles());
+
+
+
+
+                /*Role userRole =  roleRepository.findByRole( user.getUserRoles().);
+                existingUser.setRoles( new HashSet<Role>( Arrays.asList( user.getRoles() ) ) );*/
             }
 
             User kaydedilen = userRepository.save( existingUser );

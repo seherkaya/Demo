@@ -168,9 +168,10 @@
         margin: 5px;
         position: fixed;
         bottom: 0px;
-        height: 50px;
-        padding: 15px;
         right: 0px;
+        width: 100px;
+        height: 8%;
+        padding: 0px;
     }
 </style>
 <body>
@@ -289,7 +290,7 @@
                                     </div>
                                     <div id="keySave">
                                         <button type="button" class="btn btn-primary float-sm-right keybuttonSave"
-                                                style="margin:5px;width: 25%;" onclick="saveEnviroment()"> Save
+                                                style="margin:5px;width: 25%;height: 40px;" onclick="saveEnviroment()"> Save
                                         </button>
                                     </div>
 
@@ -756,7 +757,7 @@
             var password = passwordEdit.value;
             var tc = tcEdit.value;
             var roles =[];
-            roles=selectedRole;
+            roles.push(selectedRole);
             $(".error").hide();
             var hasError = false;
             var errorType = "";
@@ -829,6 +830,7 @@
         }
 
         function openUsersSet() {
+
             var x = document.getElementById("userSetting");
             if (x.style.display === "none") {
                 x.style.display = "block";
@@ -843,6 +845,9 @@
         }
 
         function openRolesSet() {
+
+            window.location.href = "http://localhost:8080/role";
+
             var x = document.getElementById("roleSetting");
             if (x.style.display === "none") {
                 x.style.display = "block";
@@ -857,6 +862,8 @@
         }
 
         function openKeysSet() {
+            window.location.href = "http://localhost:8080/key";
+
             var x = document.getElementById("keySetting");
             if (x.style.display === "none") {
                 x.style.display = "block";
@@ -871,6 +878,7 @@
         }
 
         function openSysSet() {
+            window.location.href = "http://localhost:8080/system";
             var x = document.getElementById("systemSetting");
             if (x.style.display === "none") {
                 x.style.display = "block";

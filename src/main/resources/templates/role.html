@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Anasayfa</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
+    <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</head>
+<style>
+    body {
+        font-size: medium;
+        background-color: #f2f2f2;
+    }
+    a {
+        text-align: center;
+    }
+
+    .ms-container {
+        width: 100%;
+    }
+    .centerDiv {
+        padding: 0 30px;
+        width: 1180px;
+        margin: 0 auto;
+        background-color: white;
+        border: 2px solid #D3D3D3;
+        border-radius: 8px;
+    }
+    .userList {
+        width: auto;
+        padding: 0 30px;
+        margin: 0 auto;
+        background-color: white;
+        border: 1px solid #D3D3D3;
+        border-radius: 8px;
+    }
+    .forUserInfo{
+        margin-top: 10px;
+        margin-bottom: 10px;
+    }
+    .bs-example {
+        margin: 20px;
+    }
+    .main {
+        margin: 50px auto;
+    }
+    .form-control{
+        height: 35px;
+    }
+    .has-search .form-control {
+        padding-left: 2.375rem;
+    }
+    .has-search .form-control-feedback {
+        position: absolute;
+        z-index: 2;
+        display: block;
+        width: 2.375rem;
+        height: 2.375rem;
+        line-height: 2.375rem;
+        text-align: center;
+        pointer-events: none;
+        color: #aaa;
+    }
+    .sidenav {
+        margin-top: 3%;
+        height: 100%;
+        width: 160px;
+        position: fixed;
+        z-index: 1;
+        top: 0;
+        left: 0;
+        background-color: #353D42;
+        overflow-x: hidden;
+        padding-top: 20px;
+    }
+    .sidenav a {
+        padding: 6px 8px 6px 16px;
+        color: #818181;
+        display: block;
+        margin-top: 35%;
+    }
+    .sidenav a:hover {
+        color: #f1f1f1;
+    }
+    @media screen and (max-height: 450px) {
+        .sidenav {
+            padding-top: 15px;
+        }
+        .sidenav a {
+            font-size: 18px;
+        }
+    }
+    @font-face {
+        font-family: 'WebSymbolsRegular';
+        font-weight: normal;
+        font-style: normal;
+    }
+    .ca-menu {
+        padding: 0;
+    }
+    .ca-menu li {
+        overflow: hidden;
+        position: relative;
+        display: block;
+        box-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
+        margin-bottom: 4px;
+        transition: all 300ms linear;
+    }
+    .ca-menu li:last-child {
+        margin-bottom: 0px;
+    }
+    .ca-menu li a {
+        text-align: left;
+        width: 100%;
+        height: 50px;
+        display: block;
+        color: white;
+    }
+    .ca-content {
+        position: absolute;
+        height: 60px;
+        top: 20px;
+    }
+    .ca-main {
+        -webkit-transition: all 300ms linear;
+        -moz-transition: all 300ms linear;
+        -o-transition: all 300ms linear;
+        -ms-transition: all 300ms linear;
+        transition: all 300ms linear;
+    }
+    .ca-menu li:hover {
+        background: #f0f0f0;
+    }
+    .ca-menu li:hover .ca-icon {
+
+        color: lightgray;
+        opacity: 0.8;
+        text-shadow: 0px 0px 13px #fff;
+    }
+    .ca-menu li:hover .ca-main {
+        opacity: 1;
+        color: darkgrey;
+        -webkit-animation: moveFromTop 300ms ease-in-out;
+        -moz-animation: moveFromTop 300ms ease-in-out;
+        -ms-animation: moveFromTop 300ms ease-in-out;
+    }
+    .ca-menu li:hover .ca-sub {
+        opacity: 1;
+        -webkit-animation: moveFromBottom 300ms ease-in-out;
+        -moz-animation: moveFromBottom 300ms ease-in-out;
+        -ms-animation: moveFromBottom 300ms ease-in-out;
+    }
+    .forNameAndAut{
+        width: auto;
+        padding: 0px;
+    }
+    .selectpicker  {
+        width: 100%;
+        height: 30px;
+        margin: 1px;}
+    .keybuttonSave {
+        margin: 5px;
+        position: fixed;
+        bottom: 0px;
+        right: 0px;
+        width: 100px;
+        height: 8%;
+        padding: 0px;
+    }
+</style>
+<body>
+<div class="bodyDiv">
+    <div class="row" id="forNavbar" style="margin-bottom: 0px;">
+        <nav class="navbar navbar-expand-lg bg-dark navbar-dark fixed-top" style="width: 100%;">
+            <a class="navbar-brand" href="#"></a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="collapsibleNavbar">
+                <ul class="navbar-nav">
+                    <div>
+                        <li class="nav-item" style="width: 100px">
+                            <a class="nav-link" href="#" onclick=openUsersSet()>USERS</a>
+                        </li>
+                    </div>
+                    <div>
+                        <li class="nav-item" style="width: 100px">
+                            <a class="nav-link" href="#" onclick=openRolesSet()>ROLES</a>
+                        </li>
+                    </div>
+                    <div>
+                        <li class="nav-item dropdown" style="width: 100px">
+                            <a class="nav-link dropdown" href="#" onclick=openKeysSet()>KEYS</a>
+
+                            <div class="dropdown-menu">
+                                <a class="dropdown-item" href="#">CARDS</a>
+                                <a class="dropdown-item" href="#">FINGER PRINTS</a>
+                                <a class="dropdown-item" href="#">IMAGES</a>
+                            </div>
+                        </li>
+                    </div>
+                    <div>
+                        <li class="nav-item" style="width: 100px">
+                            <a class="nav-link" href="#" onclick=openSysSet()>SYSTEM</a>
+                        </li>
+                    </div>
+                </ul>
+
+
+            </div>
+            <ul class="nav navbar-nav " style="padding-right: 20px;">
+
+                <li><a class="nav-link" href="#"><span class="glyphicon glyphicon-log-in"></span> Çıkış </a></li>
+            </ul>
+        </nav>
+        <!--Finish navbar-->
+    </div>
+    <div class="row" id="roleSetting" style="display: none">
+        <div class="col-sm-2"></div>
+        <div class="col-sm-8 centerDiv">
+            <h1>SEHER</h1>
+        </div>
+        <div class="col-sm-2"></div>
+    </div>
+    <div class="row" id="keySetting" style="display: none">
+        <div class="col-sm-12">
+            <div class="container">
+                <div class="col-sm-2"></div>
+                <div class="col-sm-8 centerDiv">
+                    <div class="main">
+                        <div class="form-group has-search">
+                            <span class="fa fa-search form-control-feedback"></span>
+                            <input type="text" class="form-control" placeholder="Search">
+                        </div>
+
+                    </div>
+                </div>
+                <div class="col-sm-2"></div>
+            </div>
+            <div class="container">
+                <div class="col-sm-2"></div>
+                <div class="col-sm-8 centerDiv">
+                </div>
+                <div class="col-sm-2"></div>
+            </div>
+        </div>
+    </div>
+    <div class="row" id="systemSetting" style="display: none">
+        <div class="col-sm-2"></div>
+        <div class="col-sm-8 centerDiv">
+            <div class="sidenav">
+                <div class="content">
+                    <ul class="ca-menu">
+                        <li>
+                            <a href="#">
+                                <div class="ca-content">
+                                    <h2 style="font-size: medium; color:#9A9EA0" class="ca-main">SYSTEM RECOVERY MODE</h2>
+                                </div>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#">
+                                <div class="ca-content">
+                                    <h2 style="font-size: medium; color:#9A9EA0" class="ca-main"> SYSTEM SETTING MODE</h2>
+                                </div>
+                            </a>
+                        </li>
+                    </ul>
+                </div><!-- content -->
+            </div>
+        </div>
+        <div class="col-sm-2"></div>
+    </div>
+    <script>
+
+    </script>
+</div>
+</body>
+</html>
