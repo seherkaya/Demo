@@ -51,6 +51,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .antMatchers( "/admin/role" ).permitAll()
                 .antMatchers( "/admin/key" ).permitAll()
                 .antMatchers( "/admin/system" ).permitAll()
+                .antMatchers( "/admin/deleteAPI" ).permitAll()
                 //.antMatchers( "/admin/home" ).permitAll()
 
                 //.antMatchers("/admin/**").hasAuthority("ADMIN").anyRequest()

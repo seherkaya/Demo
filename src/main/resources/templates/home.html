@@ -243,7 +243,7 @@
                     <div class="modal-content">
                         <div class="modal-header">
                             <button class="close" data-dismiss="modal" type="button">&times;</button>
-                            <h4 class="modal-title">DELETE</h4>
+
                         </div>
 
                         <div class="modal-body" id="deleteModalBody" style="font-size: 16pt;">
@@ -258,7 +258,7 @@
                         </div>
 
                         <div class="modal-footer">
-                            <button class="btn btn-danger" data-dismiss="modal" type="button">Kapat</button>
+                            <button class="btn btn-primary" onclick="deleteUser(str)" type="button">Sil</button>
                             <button class="btn btn-warning" data-dismiss="modal" type="button">Kapat</button>
                         </div>
                     </div>
@@ -420,15 +420,6 @@
     </div>
     <script>
 
-
-        var optList = ["ALI", "VELI", "ELLI"];
-        /*        <option value='elem_1'>elem 1</option>
-                    <option value='elem_2'>elem 2</option>
-                    <option value='elem_3'>elem 3</option>
-                    <option value='elem_4'>elem 4</option>
-                    <option value='elem_100'>elem 100</option>
-        */
-
         var str = null;
         var currentPage;
         var currentList = [];
@@ -440,7 +431,9 @@
         var environmentSelectModalCurrentUser = null;
         var searchingValue =null;
         var selectedPage =null;
+
         var selectedRole=[];
+
 
         function getPage(page, name) {
             console.log("getPage:" + page);
@@ -522,7 +515,7 @@
                 var name = user.userName;
                 var surname = user.userSurname;
                 var role = user.userRoles[0].role;
-                var enviroment = user.environment[0].environmentName;
+                environment = user.environment;
                 var tc = user.tc;
                 var email = user.userEmail;
                 var temp = "";
@@ -539,7 +532,11 @@
                 temp += '<div class="container forInfo" style="font-size: 10px;font-style: italic">';
                 temp += '<div>' + tc + '</div>'; //T.C. gelecek
                 temp += '<div>' + email + '</div></div> ';   //Tel No gelecel
-                temp += '<div class="container keyInfo" >' + enviroment + '</div> </div>';
+                for (var j in user.environment) {
+
+                    temp += '<div class="container keyInfo" >' + user.environment[j].environmentName + '</div>';
+                }
+                temp += ' </div>';
                 temp += '<div class="col-sm-4 forButtons">';
                 temp += '<div style="margin-top: 10px; margin-bottom: 5px;">';
                 temp += '<button type="button" class="btn btn-primary " style="margin-right: 5px; width: 70px;" onclick="editingModal(' + user.id + ')">EDIT</button>';
@@ -567,6 +564,14 @@
                     break;
                 }
             }
+            for(var i in selectedEnvironments) {
+                if (selectedEnvironments[i].id == environmentId) {
+                    environment = selectedEnvironments[i];
+                    if (!allEnvironments.includes(selectedEnvironments))
+                        allEnvironments.push(selectedEnvironments[i]);
+                    break;
+                }
+            }
             if (environment == null) {
                 return;
             }
@@ -582,6 +587,7 @@
 
                 selectedEnvironments = newArray;
 
+
             } else {
                 selectedEnvironments.push(environment);
             }
@@ -589,10 +595,15 @@
             renderEnvironmentModal();
         }
 
-        function renderEnvironmentModal() {
+        function renderEnvironmentModal(id) {
             if (allEnvironments == null) {
                 return;
             }
+            if (id != null || selectedEnvironments != null ) {
+               var selectedEnvironmentsArray =[];
+                   selectedEnvironmentsArray.push(id);
+            }
+
             var allEnvironmentsDiv = document.getElementById("allEnvironments");
             var selectedEnvironmentsDiv = document.getElementById("selectedEnvironments");
 
@@ -600,11 +611,14 @@
             selectedEnvironmentsDiv.innerHTML = "";
 
             var temp = "";
-            for (var i in selectedEnvironments) {
-                var environment = selectedEnvironments[i];
-                temp += "<div onclick='toggleModalEnvironmentSelection(" + environment.id + ")'>";
-                temp += environment.environmentName;
-                temp += "</div>";
+            for (var i in selectedEnvironmentsArray) {
+                selectedEnvironments = selectedEnvironmentsArray[i]
+                for (var j in selectedEnvironments) {
+                    var environment = selectedEnvironments[i];
+                    temp += "<div onclick='toggleModalEnvironmentSelection(" + environment.id + ")'>";
+                    temp += environment.environmentName;
+                    temp += "</div>";
+                }
             }
             selectedEnvironmentsDiv.innerHTML = temp;
 
@@ -634,7 +648,7 @@
 
         }
 
-        function getAllEnvironments() {
+        function getAllEnvironments(id) {
             $.ajax({
                 url: "http://localhost:8080/admin/enviromentAPI",
                 contentType: 'application/json',
@@ -645,7 +659,7 @@
                 success: function (data) {
                     var list = data.data;
                     allEnvironments = list;
-                    renderEnvironmentModal();
+                    renderEnvironmentModal(id);
                 },
                 error: function (data) {
                     console.log("Device control failed" + data);
@@ -674,10 +688,17 @@
         }
 
         function keyModal(id) {
-            environmentSelectModalCurrentUser = id;
+
+            for (var i in str.list) {
+                if (str.list[i].id == id) {
+                    environmentSelectModalCurrentUser = str.list[i].environment;
+                }
+            }
+
+            renderEnvironmentModal(environmentSelectModalCurrentUser);
 
             if (allEnvironments == null) {
-                getAllEnvironments();
+                getAllEnvironments(id);
             }
 
             $("#keyModal").modal('show');
@@ -725,12 +746,6 @@
                         temp += '<option style= class="form-control"  placeholder="Role" type="text" value="' + allRoles[i]+ '">'+ allRoles[i].role +'</option>'; //Selection box gelecek
 
                     }
-/*
-                    temp += '<input class="form-control" id="roleEdit" placeholder="Role" type="text" value="' + user.roles[0].role + '"/>'; //Selection box gelecek
-*/
-
-
-
                     temp += '<input class="form-control" id="tcEdit" placeholder="TC" type="text" value="' + user.tc + '"/>';
                     temp += '</div>';
                     temp += '<div class="modal-footer">';
@@ -744,8 +759,6 @@
             /*$("#editModal").modal().show();*/
 
         }
-
-
 
         function editSave(id) {
             var selectedRoleIndex= roleEdit.selectedIndex;
@@ -810,6 +823,34 @@
 
         function deleteModal(id) {
             var deleteModal = document.getElementById("deleteModal");
+            $("#deleteModal").modal('show');
+
+        }
+
+        function deleteUser(id) {
+            $.ajax({
+                url: "http://localhost:8080/admin/deleteAPI",
+                contentType: 'application/json',
+                traditional: true,
+                data: JSON.stringify(id),
+                dataType: 'json',
+                processData: false,
+                type: 'POST',
+                success: function (data) {
+                    var status = data.status;
+                    str = data.Objectdata;
+                    if (data.successful == true) {
+                        $('#editModal').modal('toggle');
+                        $("#fixed-form-container .body").show();
+                        $(".popupCon").fadeToggle(3000);
+                        console.log("Kapatıldı");
+                        console.log(str);
+                    }
+                },
+                error: function (data) {
+                    console.log("Device control failed" + data);
+                }
+            })
         }
 
         function previousPage() {
@@ -848,61 +889,17 @@
 
             window.location.href = "http://localhost:8080/admin/role";
 
-          /*  var x = document.getElementById("roleSetting");
-            if (x.style.display === "none") {
-                x.style.display = "block";
-                document.getElementById('userSetting').style.display = "none";
-                document.getElementById('keySetting').style.display = "none";
-                document.getElementById('systemSetting').style.display = "none";
-            } else {
-                document.getElementById('userSetting').style.display = "none";
-                document.getElementById('keySetting').style.display = "none";
-                document.getElementById('systemSetting').style.display = "none";
-            }*/
         }
 
         function openKeysSet() {
             window.location.href = "http://localhost:8080/admin/key";
 
-            /* var x = document.getElementById("keySetting");
-           if (x.style.display === "none") {
-                x.style.display = "block";
-                document.getElementById('roleSetting').style.display = "none";
-                document.getElementById('userSetting').style.display = "none";
-                document.getElementById('systemSetting').style.display = "none";
-            } else {
-                document.getElementById('roleSetting').style.display = "none";
-                document.getElementById('userSetting').style.display = "none";
-                document.getElementById('systemSetting').style.display = "none";
-            }*/
         }
 
         function openSysSet() {
             window.location.href = "http://localhost:8080/admin/system";
-            /*var x = document.getElementById("systemSetting");
-            if (x.style.display === "none") {
-                x.style.display = "block";
-                document.getElementById('roleSetting').style.display = "none";
-                document.getElementById('keySetting').style.display = "none";
-                document.getElementById('userSetting').style.display = "none";
-            } else {
-                document.getElementById('roleSetting').style.display = "none";
-                document.getElementById('keySetting').style.display = "none";
-                document.getElementById('userSetting').style.display = "none";
-            }*/
-        }
 
-        var _gaq = _gaq || [];
-        _gaq.push(['_setAccount', 'UA-7243260-2']);
-        _gaq.push(['_trackPageview']);
-        (function () {
-            var ga = document.createElement('script');
-            ga.type = 'text/javascript';
-            ga.async = true;
-            ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-            var s = document.getElementsByTagName('script')[0];
-            s.parentNode.insertBefore(ga, s);
-        });
+        }
 
     </script>
 </div>

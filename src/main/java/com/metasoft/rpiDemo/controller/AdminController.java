@@ -54,16 +54,26 @@ public class AdminController {
     }
 
     @ResponseBody
+    @RequestMapping(value = "/allEnviromentAPI", method = RequestMethod.POST)
+    public String returnAllEnviroment()  throws Exception {
+        return new Gson().toJson( environmentServiceImpl.allEnvironment( ));
+    }
+
+    @ResponseBody
     @RequestMapping(value = "/rolesAPI", method = RequestMethod.POST)
     public String returnRole()  throws Exception {
         return new Gson().toJson( roleServiceImpl.allRoles( ));
+    }
+    @ResponseBody
+    @RequestMapping(value = "/deleteAPI", method = RequestMethod.POST)
+    public String deleteUser(@RequestBody User user )  throws Exception {
+        return new Gson().toJson( userServiceImpl.deleteUser( user));
     }
 
     @ResponseBody //This annotation provides to return String from method
     @RequestMapping(value = "/enrollUserEnvironmentAPI", method = RequestMethod.POST)
     public String returnEnrollUserEnvironment(@RequestParam (required =true,value = "user_id") int user_id ,
                                               @RequestBody  EnvironmentList environmentList){
-
 
         return new Gson().toJson( userServiceImpl.enrollEnvironment(user_id, environmentList));
     }

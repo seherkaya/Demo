@@ -20,4 +20,6 @@ public interface UserService {
 
     ApiResponse updateUser(User user);
 
+    ApiResponse deleteUser(User user);
+
 }

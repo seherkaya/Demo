@@ -4,6 +4,7 @@ import com.metasoft.rpiDemo.model.*;
 import com.metasoft.rpiDemo.repository.EnvironmentRepository;
 import com.metasoft.rpiDemo.repository.RoleRepository;
 import com.metasoft.rpiDemo.repository.UserRepository;
+import com.metasoft.rpiDemo.system.SystemGeneral;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -97,13 +98,16 @@ public class UserServiceImpl implements UserService {
     public ApiResponse enrollEnvironment(int user_id, int environment_id ) {
         ApiResponse response = new ApiResponse();
         User userExist =userRepository.findById( user_id );
-        Environment environmentExist =environmentRepository.findById( environment_id );
+         Environment environmentExist =environmentRepository.findById( environment_id );
+
 
         if(userExist!=null && environmentExist!=null ) {
-
+            environmentExist.setActive( 1 );
             Set<Environment> environments = userExist.getEnvironment();
+
             if (environments == null) {
                 environments = new HashSet<>();
+
             }
 
             userExist.setEnvironment(environments);
@@ -135,6 +139,7 @@ public class UserServiceImpl implements UserService {
 
             for (int i=0; i<myArray.getEnv().size() ;i++ ){
                 Environment environmentExist =environmentRepository.findById( myArray.getEnv().get( i ).getId() );
+                environmentExist.setActive( 1 );
                 environments.add(environmentExist); }
                 if (environments == null) {
                     environments = new HashSet<>();
@@ -168,11 +173,11 @@ public class UserServiceImpl implements UserService {
             if (user.getUserSurname() != null)
                 existingUser.setUserSurname( user.getUserSurname() );
             if (user.getUserEmail() != null){
-                /*if (!SystemGeneral.validateEmail( user.getEmail() )) {
+                if (!SystemGeneral.validateEmail( user.getUserEmail() )) {
                     response.setSuccessful( false );
-                    response.setMessage( "Email is not valid" );
+                    response.setMessageText( "Email is not valid" );
                     return response;
-                }*/
+                }
             }
             existingUser.setUserEmail( user.getUserEmail() );
             if (user.getUserPassword() != null)
@@ -184,17 +189,13 @@ public class UserServiceImpl implements UserService {
             if(user.getRoles()!=null){
 
                 existingUser.setUserRoles(user.getUserRoles());
-
-
-
-
                 /*Role userRole =  roleRepository.findByRole( user.getUserRoles().);
                 existingUser.setRoles( new HashSet<Role>( Arrays.asList( user.getRoles() ) ) );*/
             }
 
-            User kaydedilen = userRepository.save( existingUser );
+            User savedUser = userRepository.save( existingUser );
             response.setSuccessful( true );
-            response.setData( kaydedilen );
+            response.setData( savedUser );
             return response;
         } else {
             response.setSuccessful( false );
@@ -204,5 +205,18 @@ public class UserServiceImpl implements UserService {
         }
 
     }
+
+    @Override
+    public ApiResponse deleteUser(User user) {
+        ApiResponse response =new ApiResponse( );
+        userRepository.findById( user.getId() );
+        user.setActive( 0 );
+
+        User savedUser = userRepository.save( user );
+        response.setSuccessful( true );
+        response.setData( savedUser );
+        return response;
+    }
+
 
 }

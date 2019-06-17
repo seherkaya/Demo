@@ -228,55 +228,7 @@
         </div>
         <div class="col-sm-2"></div>
     </div>
-    <div class="row" id="keySetting" style="display: none">
-        <div class="col-sm-12">
-            <div class="container">
-                <div class="col-sm-2"></div>
-                <div class="col-sm-8 centerDiv">
-                    <div class="main">
-                        <div class="form-group has-search">
-                            <span class="fa fa-search form-control-feedback"></span>
-                            <input type="text" class="form-control" placeholder="Search">
-                        </div>
 
-                    </div>
-                </div>
-                <div class="col-sm-2"></div>
-            </div>
-            <div class="container">
-                <div class="col-sm-2"></div>
-                <div class="col-sm-8 centerDiv">
-                </div>
-                <div class="col-sm-2"></div>
-            </div>
-        </div>
-    </div>
-    <div class="row" id="systemSetting" style="display: none">
-        <div class="col-sm-2"></div>
-        <div class="col-sm-8 centerDiv">
-            <div class="sidenav">
-                <div class="content">
-                    <ul class="ca-menu">
-                        <li>
-                            <a href="#">
-                                <div class="ca-content">
-                                    <h2 style="font-size: medium; color:#9A9EA0" class="ca-main">SYSTEM RECOVERY MODE</h2>
-                                </div>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#">
-                                <div class="ca-content">
-                                    <h2 style="font-size: medium; color:#9A9EA0" class="ca-main"> SYSTEM SETTING MODE</h2>
-                                </div>
-                            </a>
-                        </li>
-                    </ul>
-                </div><!-- content -->
-            </div>
-        </div>
-        <div class="col-sm-2"></div>
-    </div>
     <script>
 
 
@@ -299,49 +251,15 @@
         function openRolesSet() {
 
             window.location.href = "http://localhost:8080/admin/role";
-
-            /*  var x = document.getElementById("roleSetting");
-              if (x.style.display === "none") {
-                  x.style.display = "block";
-                  document.getElementById('userSetting').style.display = "none";
-                  document.getElementById('keySetting').style.display = "none";
-                  document.getElementById('systemSetting').style.display = "none";
-              } else {
-                  document.getElementById('userSetting').style.display = "none";
-                  document.getElementById('keySetting').style.display = "none";
-                  document.getElementById('systemSetting').style.display = "none";
-              }*/
+            
         }
 
         function openKeysSet() {
             window.location.href = "http://localhost:8080/admin/key";
-
-            /* var x = document.getElementById("keySetting");
-           if (x.style.display === "none") {
-                x.style.display = "block";
-                document.getElementById('roleSetting').style.display = "none";
-                document.getElementById('userSetting').style.display = "none";
-                document.getElementById('systemSetting').style.display = "none";
-            } else {
-                document.getElementById('roleSetting').style.display = "none";
-                document.getElementById('userSetting').style.display = "none";
-                document.getElementById('systemSetting').style.display = "none";
-            }*/
         }
 
         function openSysSet() {
             window.location.href = "http://localhost:8080/admin/system";
-            /*var x = document.getElementById("systemSetting");
-            if (x.style.display === "none") {
-                x.style.display = "block";
-                document.getElementById('roleSetting').style.display = "none";
-                document.getElementById('keySetting').style.display = "none";
-                document.getElementById('userSetting').style.display = "none";
-            } else {
-                document.getElementById('roleSetting').style.display = "none";
-                document.getElementById('keySetting').style.display = "none";
-                document.getElementById('userSetting').style.display = "none";
-            }*/
         }
     </script>
 </div>

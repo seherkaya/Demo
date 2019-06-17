@@ -9,6 +9,7 @@ public interface EnvironmentRepository extends JpaRepository<Environment,Integer
 
    List<Environment> findAllByActive(Integer active);
    List<Environment> findAllById(List<Environment> envArray);
+   List<Environment> findAll();
 
    Environment findById(int id);
 }

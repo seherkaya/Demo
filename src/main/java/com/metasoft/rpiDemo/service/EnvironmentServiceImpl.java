@@ -38,4 +38,26 @@ public class EnvironmentServiceImpl implements EnvironmentService{
         }
 
     }
+
+    @Override
+    public ApiResponse allEnvironment() throws Exception {
+        ApiResponse response = new ApiResponse(  );
+
+        List<Environment> environmentExist = environmentRepository.findAll();
+        if(environmentExist!=null){
+            response.setData( environmentExist );
+            response.setSuccessful( true );
+            response.setMessageText( "Succeed" );
+            return response;
+        }
+        else {
+
+            response.setSuccessful( false );
+            response.setMessageText( "Something's wrong" );
+            return response;
+
+        }
+
+
+    }
 }

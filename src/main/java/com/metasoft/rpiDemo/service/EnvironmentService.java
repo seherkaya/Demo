@@ -5,4 +5,5 @@ import com.metasoft.rpiDemo.model.ApiResponse;
 public interface EnvironmentService {
 
     ApiResponse searchEnvironmetActive(Integer active) throws Exception;
+    ApiResponse allEnvironment() throws Exception;
 }

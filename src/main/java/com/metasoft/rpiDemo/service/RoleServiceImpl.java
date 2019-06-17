@@ -1,7 +1,6 @@
 package com.metasoft.rpiDemo.service;
 
 import com.metasoft.rpiDemo.model.ApiResponse;
-import com.metasoft.rpiDemo.model.Environment;
 import com.metasoft.rpiDemo.model.Role;
 import com.metasoft.rpiDemo.repository.RoleRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,9 +19,9 @@ public class RoleServiceImpl implements RoleService {
     public ApiResponse allRoles() throws Exception {
         ApiResponse response = new ApiResponse(  );
 
-        List<Role> environmentExist = roleRepository.findAllBy();
-        if(environmentExist!=null){
-            response.setData( environmentExist );
+        List<Role> roleExist = roleRepository.findAllBy();
+        if(roleExist!=null){
+            response.setData( roleExist );
             response.setSuccessful( true );
             response.setMessageText( "Succeed" );
             return response;
