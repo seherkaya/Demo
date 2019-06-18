@@ -20,10 +20,6 @@
     a {
         text-align: center;
     }
-
-    .ms-container {
-        width: 100%;
-    }
     .centerDiv {
         padding: 0 30px;
         width: 1180px;
@@ -131,30 +127,22 @@
         -webkit-transition: all 300ms linear;
         -moz-transition: all 300ms linear;
         -o-transition: all 300ms linear;
-        -ms-transition: all 300ms linear;
         transition: all 300ms linear;
     }
     .ca-menu li:hover {
         background: #f0f0f0;
-    }
-    .ca-menu li:hover .ca-icon {
-
-        color: lightgray;
-        opacity: 0.8;
-        text-shadow: 0px 0px 13px #fff;
     }
     .ca-menu li:hover .ca-main {
         opacity: 1;
         color: darkgrey;
         -webkit-animation: moveFromTop 300ms ease-in-out;
         -moz-animation: moveFromTop 300ms ease-in-out;
-        -ms-animation: moveFromTop 300ms ease-in-out;
     }
     .ca-menu li:hover .ca-sub {
         opacity: 1;
         -webkit-animation: moveFromBottom 300ms ease-in-out;
         -moz-animation: moveFromBottom 300ms ease-in-out;
-        -ms-animation: moveFromBottom 300ms ease-in-out;
+
     }
     .forNameAndAut{
         width: auto;
@@ -277,7 +265,7 @@
                         <div id="divBodyandKey">
                             <div class="row">
                                 <div class="col-sm-12">
-                                    <div id='allEnvironments' class="col-sm-5" style=" background-color: white; border: 2px solid #D3D3D3; border-radius: 8px; height: 100%;">
+                                    <div id='allKeys' class="col-sm-5" style=" background-color: white; border: 2px solid #D3D3D3; border-radius: 8px; height: 100%;">
 
                                     </div>
                                     <div class="col-sm-2" id="forKeyButton" style="padding-top: 20%;padding-bottom: 20%;">
@@ -285,7 +273,7 @@
 
 
                                     </div>
-                                    <div id="selectedEnvironments" class="col-sm-5" style=" background-color: white; border: 2px solid #D3D3D3; border-radius: 8px; height: 100%;">
+                                    <div id="selectedKeys" class="col-sm-5" style=" background-color: white; border: 2px solid #D3D3D3; border-radius: 8px; height: 100%;">
 
                                     </div>
                                     <div id="keySave">
@@ -434,14 +422,14 @@
         var currentList = [];
         var pageLi = document.getElementById('pageNumber');
         var totalPage = null;
-        var allEnvironments = null;
+        var allKeys = null;
         var allRoles =null;
-        var selectedEnvironments = null;
-        var environmentSelectModalCurrentUser = [];
+        var selectedKeys = null;
+        var keySelectModalCurrentUser = [];
         var searchingValue =null;
         var selectedPage =null;
-        var selectedRole=[];
-        var userSelectedAllEnvironments = [];
+        var selectedRole=[];Key
+       // var userSelectedAllKeys = [];
 
         function getPage(page, name) {
             console.log("getPage:" + page);
@@ -523,7 +511,7 @@
                 var name = user.userName;
                 var surname = user.userSurname;
                 var role = user.userRoles[0].role;
-                environment = user.environment;
+                key = user.key;
                 var tc = user.tc;
                 var email = user.userEmail;
                 var temp = "";
@@ -540,9 +528,9 @@
                 temp += '<div class="container forInfo" style="font-size: 10px;font-style: italic">';
                 temp += '<div>' + tc + '</div>'; //T.C. gelecek
                 temp += '<div>' + email + '</div></div> ';   //Tel No gelecel
-                for (var j in user.environment) {
+                for (var j in user.key) {
 
-                    temp += '<div class="container keyInfo" >' + user.environment[j].environmentName + '</div>';
+                    temp += '<div class="container keyInfo" >' + user.key[j].keyName + '</div>';
                 }
                 temp += ' </div>';
                 temp += '<div class="col-sm-4 forButtons">';
@@ -558,85 +546,84 @@
         $(document).ready(function () {
             $("#fixed-form-container .body").hide();
             getPage(0);
-            getAllEnvironments();
+            getAllKeys();
             getAllRoles();
 
         })
 
-        function toggleModalEnvironmentSelection(environmentId) {
-            var environment = null;
-            for (var i in allEnvironments) {
-                var temp = allEnvironments[i];
-                if (temp.id == environmentId) {
-                    environment = temp;
+        function toggleModalKeySelection(keyId) {
+            var key = null;
+            for (var i in allKeys) {
+                var temp = allKeys[i];
+                if (temp.id == keyId) {
+                    key = temp;
                     break;
                 }
             }
-            for (var i in selectedEnvironments) {
-                var temp = selectedEnvironments[i];
-                if (temp.id == environmentId) {
-                    environment = temp;
+            for (var i in selectedKeys) {
+                var temp = selectedKeys[i];
+                if (temp.id == keyId) {
+                    key = temp;
                     break;
                 }
             }
-            if (environment == null) {
+            if (key == null) {
                 return;
             }
-            var index = selectedEnvironments.indexOf(environment);
+            var index = selectedKeys.indexOf(key);
             if (index != -1) {
                 var newArray = [];
-                for (var i in selectedEnvironments) {
-                    var tmp = selectedEnvironments[i];
-                    if (tmp.id != environmentId) {
+                for (var i in selectedKeys) {
+                    var tmp = selectedKeys[i];
+                    if (tmp.id != keyId) {
                         newArray.push(tmp);
                     }
                 }
-                selectedEnvironments = newArray;
-                allEnvironments.push(environment);
+                selectedKeys = newArray;
+                allKeys.push(key);
             } else {
 
-                var tempAllEnvironments=allEnvironments.filter(function (e){
-                    return e!==environment;
+                var tempAllKeys=allKeys.filter(function (e){
+                    return e!==key;
                 })
 
-                allEnvironments=tempAllEnvironments;
-                selectedEnvironments.push(environment);
+                allKeys=tempAllKeys;
+                selectedKeys.push(key);
 
                 }
 
 
-            renderEnvironmentModal();
+            renderKeyModal();
         }
 
-        function renderEnvironmentModal(environmentSelectModalCurrentUser) {
-            if (allEnvironments == null) {
+        function renderKeyModal(keySelectModalCurrentUser) {
+            if (allKeys == null) {
                 return;
             }
-            var allEnvironmentsDiv = document.getElementById("allEnvironments");
-            var selectedEnvironmentsDiv = document.getElementById("selectedEnvironments");
-            allEnvironmentsDiv.innerHTML = "";
-            selectedEnvironmentsDiv.innerHTML = "";
-            var selectedEviromentsNumber;
+            var allKeysDiv = document.getElementById("allKeys");
+            var selectedKeysDiv = document.getElementById("selectedKeys");
+            allKeysDiv.innerHTML = "";
+            selectedKeysDiv.innerHTML = "";
             var temp = "";
-            if(selectedEnvironments ==null){
-                selectedEnvironments=0;
+            if(selectedKeys ==null){
+                selectedKeys=0;
             }
 
-            for (var i in selectedEnvironments) {
-                var environment = selectedEnvironments[i];
-                    temp += "<div onclick='toggleModalEnvironmentSelection(" + environment.id + ")'>";
-                    temp += environment.environmentName;
+            for (var i in selectedKeys) {
+                var key = selectedKeys[i];
+                    temp += "<div onclick='toggleModalKeySelection(" + key.id + ")'>";
+                    temp += key.keyName;
                     temp += "</div>";
                 }
 
-            selectedEnvironmentsDiv.innerHTML = temp;
+            selectedKeysDiv.innerHTML = temp;
             temp = "";
-            for (var i in allEnvironments) {
-                var environment = allEnvironments[i];
+            for (var i in allKeys) {
+                var key = allKeys[i];
                 var isThisAlreadySelected = false;
-                for (var k in selectedEnvironments) {
-                    var tempSelected = selectedEnvironments[k];
-                    if (tempSelected.id == environment.id) {
+                for (var k in selectedKeys) {
+                    var tempSelected = selectedKeys[k];
+                    if (tempSelected.id == key.id) {
                         isThisAlreadySelected = true;
                         break;
                     }
@@ -644,14 +631,14 @@
                 if (isThisAlreadySelected) {
                     continue;
                 }
-                temp += "<div onclick='toggleModalEnvironmentSelection(" + environment.id + ")'>";
-                temp += environment.environmentName;
+                temp += "<div onclick='toggleModalKeySelection(" + key.id + ")'>";
+                temp += key.keyName;
                 temp += "</div>";
             }
-            allEnvironmentsDiv.innerHTML = temp;
+            allKeysDiv.innerHTML = temp;
         }
 
-        function getAllEnvironments() {
+        function getAllKeys() {
             $.ajax({
                 url: "http://localhost:8080/admin/enviromentAPI",
                 contentType: 'application/json',
@@ -661,8 +648,8 @@
                 type: 'POST',
                 success: function (data) {
                     var list = data.data;
-                    allEnvironments = list;
-                    renderEnvironmentModal();
+                    allKeys = list;
+                    renderKeyModal();
                 },
                 error: function (data) {
                     console.log("Device control failed" + data);
@@ -691,32 +678,32 @@
         }
 
         function keyModal(id) {
-            var containUserEnvironmentBefore =null;
+            var containUserKeyBefore =null;
 
             for (var i in str.list) {
                 if (str.list[i].id == id) {
-                    environmentSelectModalCurrentUser = str.list[i].environment;
+                    keySelectModalCurrentUser = str.list[i].key;
                 }
             }
-            for(i in allEnvironments){
-                if(allEnvironments.includes(environmentSelectModalCurrentUser[i]) ){
-                    containUserEnvironmentBefore=true;
+            for(i in allKeys){
+                if(allKeys.includes(keySelectModalCurrentUser[i]) ){
+                    containUserKeyBefore=true;
                 }
             }
-                for(i in selectedEnvironments){
-                    if( selectedEnvironments.includes(environmentSelectModalCurrentUser[i])){
-                        containUserEnvironmentBefore=true;
+                for(i in selectedKeys){
+                    if( selectedKeys.includes(keySelectModalCurrentUser[i])){
+                        containUserKeyBefore=true;
                     }
 
             }
-            if (environmentSelectModalCurrentUser != null && containUserEnvironmentBefore!=true){
-                selectedEnvironments = environmentSelectModalCurrentUser;
+            if (keySelectModalCurrentUser != null && containUserKeyBefore!=true){
+                selectedKeys = keySelectModalCurrentUser;
             }
 
-            renderEnvironmentModal(environmentSelectModalCurrentUser);
+            renderKeyModal(keySelectModalCurrentUser);
 
-            if (allEnvironments == null) {
-                getAllEnvironments(id);
+            if (allKeys == null) {
+                getAllKeys(id);
             }
 
             $("#keyModal").modal('show');
@@ -724,19 +711,19 @@
         }
 
         function saveEnviroment() {
-            if (environmentSelectModalCurrentUser == null) {
+            if (keySelectModalCurrentUser == null) {
                 return;
             }
             $.ajax({
-                url: "http://localhost:8080/admin/enrollUserEnvironmentAPI?user_id=" + environmentSelectModalCurrentUser,
+                url: "http://localhost:8080/admin/enrollUserKeyAPI?user_id=" + keySelectModalCurrentUser,
                         contentType: 'application/json',
-                data: JSON.stringify({env: selectedEnvironments}),
+                data: JSON.stringify({env: selectedKeys}),
                         traditional: true,
                         dataType: 'json',
                         processData: false,
                         type: 'POST',
                         success: function (data) {
-                            alert("oldu sehercim")
+                            alert("Kayıt Başarılı");
                         },
                         error: function (data) {
                             console.log("Device control failed" + data);
