@@ -22,6 +22,9 @@ public class Role {
     @Column(name = "role")
     private String role;
 
+    @Column(name = "active")
+    private int active;
+
     public int getId() {
         return id;
     }
@@ -36,5 +39,13 @@ public class Role {
 
     public void setRole(String role) {
         this.role = role;
+    }
+
+    public int getActive() {
+        return active;
+    }
+
+    public void setActive(int active) {
+        this.active = active;
     }
 }

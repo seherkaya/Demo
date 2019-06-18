@@ -1,22 +1,13 @@
 package com.metasoft.rpiDemo.controller;
 
 import com.google.gson.Gson;
-import com.metasoft.rpiDemo.model.EnvironmentList;
-import com.metasoft.rpiDemo.model.User;
-import com.metasoft.rpiDemo.service.EnvironmentService;
-import com.metasoft.rpiDemo.service.EnvironmentServiceImpl;
+import com.metasoft.rpiDemo.model.*;
+import com.metasoft.rpiDemo.service.KeyServiceImpl;
 import com.metasoft.rpiDemo.service.RoleServiceImpl;
 import com.metasoft.rpiDemo.service.UserServiceImpl;
-import org.omg.CORBA.Environment;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
-
-import java.awt.*;
-import java.lang.reflect.Array;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
 
 @Controller
 @RequestMapping(value = "/admin")
@@ -26,7 +17,7 @@ public class AdminController {
     private UserServiceImpl userServiceImpl;
 
     @Autowired
-    private EnvironmentServiceImpl environmentServiceImpl;
+    private KeyServiceImpl keyServiceImpl;
 
     @Autowired
     private RoleServiceImpl roleServiceImpl;
@@ -37,62 +28,129 @@ public class AdminController {
         return "home";
     }
 
+    //region User Operation
 
-
-    @ResponseBody //This annotation provides to return String from method
-    @RequestMapping(value = "/listAPI", method = RequestMethod.POST)
+    //User List
+    @ResponseBody
+    @RequestMapping(value = "/userlistAPI", method = RequestMethod.POST)
     public String returnList(@RequestParam(required = false, value = "name") String name,
                               @RequestParam( required = true, value = "pageNo") Integer pageNo)
     {if(pageNo== null){pageNo=0;}
         return new Gson().toJson( userServiceImpl.searchAll( name,pageNo ) );
     }
 
+    //Add User
     @ResponseBody
-    @RequestMapping(value = "/enviromentAPI", method = RequestMethod.POST)
-    public String returnEnviroment()  throws Exception {
-        return new Gson().toJson( environmentServiceImpl.searchEnvironmetActive( 0 ));
+    @RequestMapping(value = "/addUserAPI", method = RequestMethod.POST)
+    public String addUser(@RequestBody User user )  throws Exception {
+        return new Gson().toJson( userServiceImpl.addUser( user));
     }
 
+    //User Delete
     @ResponseBody
-    @RequestMapping(value = "/allEnviromentAPI", method = RequestMethod.POST)
-    public String returnAllEnviroment()  throws Exception {
-        return new Gson().toJson( environmentServiceImpl.allEnvironment( ));
-    }
-
-    @ResponseBody
-    @RequestMapping(value = "/rolesAPI", method = RequestMethod.POST)
-    public String returnRole()  throws Exception {
-        return new Gson().toJson( roleServiceImpl.allRoles( ));
-    }
-    @ResponseBody
-    @RequestMapping(value = "/deleteAPI", method = RequestMethod.POST)
+    @RequestMapping(value = "/userDeleteAPI", method = RequestMethod.POST)
     public String deleteUser(@RequestBody User user )  throws Exception {
         return new Gson().toJson( userServiceImpl.deleteUser( user));
     }
-
-    @ResponseBody //This annotation provides to return String from method
+    //Enroll environment to user
+    @ResponseBody
     @RequestMapping(value = "/enrollUserEnvironmentAPI", method = RequestMethod.POST)
     public String returnEnrollUserEnvironment(@RequestParam (required =true,value = "user_id") int user_id ,
-                                              @RequestBody  EnvironmentList environmentList){
+                                              @RequestBody KeyList environmentList){
 
-        return new Gson().toJson( userServiceImpl.enrollEnvironment(user_id, environmentList));
+        return new Gson().toJson( userServiceImpl.enrollKey(user_id, environmentList));
     }
+    //User update
 
-    @ResponseBody //This annotation provides to return String from method
+    @ResponseBody
     @RequestMapping(value = "/updateUserAPI", method = RequestMethod.POST)
     public String updateUser(@RequestBody User user){
 
         return new Gson().toJson( userServiceImpl.updateUser(user));
     }
 
+    //endregion
+
+    //region  Role Operations
 
     @RequestMapping(value = "/role", method = RequestMethod.GET)
     public String role(){ return "role"; }
 
+    //All Role List
+    @ResponseBody
+    @RequestMapping(value = "/rolesListAPI", method = RequestMethod.POST)
+    public String returnRole()  throws Exception {
+        return new Gson().toJson( roleServiceImpl.allRoles( ));
+    }
 
+    //Add Role
+    @ResponseBody
+    @RequestMapping(value = "/addRoleAPI", method = RequestMethod.POST)
+    public String addRole(@RequestBody Role role )  throws Exception {
+        return new Gson().toJson( roleServiceImpl.addRole( role));
+    }
+
+    //Role Delete
+    @ResponseBody
+    @RequestMapping(value = "/roleDeleteAPI", method = RequestMethod.POST)
+    public String deleteRole(@RequestBody Role role )  throws Exception {
+        return new Gson().toJson( roleServiceImpl.deleteRole( role));
+    }
+
+    //role update
+    @ResponseBody
+    @RequestMapping(value = "/updateRoleAPI", method = RequestMethod.POST)
+    public String updateUser(@RequestBody Role role){
+
+        return new Gson().toJson( roleServiceImpl.updateRole(role));
+    }
+
+    //endregion
+
+    //region Key Operations
     @RequestMapping(value = "/key", method = RequestMethod.GET)
     public String key(){  return "key";    }
 
+    //Available Key List
+    @ResponseBody
+    @RequestMapping(value = "/availableKeyAPI", method = RequestMethod.POST)
+    public String returnAvailable()  throws Exception {
+        return new Gson().toJson( keyServiceImpl.availableKey( 0 ));
+    }
+
+    // All Key List
+    @ResponseBody
+    @RequestMapping(value = "/keysListAPI", method = RequestMethod.POST)
+    public String returnAllEnviroment()  throws Exception {
+        return new Gson().toJson( keyServiceImpl.allKey( ));
+    }
+
+    @ResponseBody
+    @RequestMapping(value = "/keyDeleteAPI", method = RequestMethod.POST)
+    public String deleteRole(@RequestBody Key key )  throws Exception {
+        return new Gson().toJson( keyServiceImpl.deleteKey( key));
+    }
+
+    //role update
+    @ResponseBody
+    @RequestMapping(value = "/updateKeyAPI", method = RequestMethod.POST)
+    public String updateUser(@RequestBody Key key){
+
+        return new Gson().toJson( keyServiceImpl.updateKey(key));
+    }
+
+    @ResponseBody
+    @RequestMapping(value = "/addKeyAPI", method = RequestMethod.POST)
+    public String addKey(@RequestBody Key key )  throws Exception {
+        return new Gson().toJson( keyServiceImpl.addKey( key));
+    }
+
+    //endregion
+
+    //region System Operation
+
     @RequestMapping(value = "/system", method = RequestMethod.GET)
     public String system(){ return "system";    }
+
+    //endregion
 }

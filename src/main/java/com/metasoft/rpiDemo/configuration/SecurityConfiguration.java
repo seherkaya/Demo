@@ -10,8 +10,6 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
-import javax.sql.DataSource;
-
 @Configuration
 @EnableWebSecurity
 public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
@@ -44,17 +42,35 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .antMatchers( "/login" ).permitAll()
                 .antMatchers( "/loginAPI" ).permitAll()
                 .antMatchers( "/admin/home" ).permitAll()
-                .antMatchers( "/admin/listAPI" ).permitAll()
-                .antMatchers( "/admin/enviromentAPI" ).permitAll()
+
+                //User
+
+                .antMatchers( "/admin/userlistAPI" ).permitAll()
+                .antMatchers( "/admin/addUserAPI" ).permitAll()
+                .antMatchers( "/admin/userDeleteAPI" ).permitAll()
                 .antMatchers( "/admin/enrollUserEnvironmentAPI" ).permitAll()
                 .antMatchers( "/admin/updateUserAPI" ).permitAll()
-                .antMatchers( "/admin/role" ).permitAll()
-                .antMatchers( "/admin/key" ).permitAll()
-                .antMatchers( "/admin/system" ).permitAll()
-                .antMatchers( "/admin/deleteAPI" ).permitAll()
-                //.antMatchers( "/admin/home" ).permitAll()
 
-                //.antMatchers("/admin/**").hasAuthority("ADMIN").anyRequest()
+                //Role
+
+                .antMatchers( "/admin/role" ).permitAll()
+                .antMatchers( "/admin/rolesListAPI" ).permitAll()
+                .antMatchers( "/admin/addRoleAPI" ).permitAll()
+                .antMatchers( "/admin/roleDeleteAPI" ).permitAll()
+                .antMatchers( "/admin/updateRoleAPI" ).permitAll()
+
+                //Key
+
+                .antMatchers( "/admin/key" ).permitAll()
+                .antMatchers( "/admin/availableKeyAPI" ).permitAll()
+                .antMatchers( "/admin/keysListAPI" ).permitAll()
+                .antMatchers( "/admin/keyDeleteAPI" ).permitAll()
+                .antMatchers( "/admin/updateKeyAPI" ).permitAll()
+                .antMatchers( "/admin/addKeyAPI" ).permitAll()
+
+
+                .antMatchers( "/admin/system" ).permitAll()
+
 
                 .and().csrf().disable().formLogin()
                 .loginPage("/login").failureUrl("/login?error=true")
@@ -63,9 +79,6 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .logoutSuccessUrl("/").and().exceptionHandling()
                 .accessDeniedPage("/access-denied");
                 /*.antMatchers( "/admin/**" ).hasAuthority( "ADMIN" ).anyRequest()*/
-
-
-
 
 
     }

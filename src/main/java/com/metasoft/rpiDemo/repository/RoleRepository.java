@@ -4,9 +4,15 @@ import com.metasoft.rpiDemo.model.Role;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;
+import java.util.Set;
 
 public interface RoleRepository extends JpaRepository<Role,Integer> {
 
-    List<Role> findByRole(String role);
+    Role findById(int id);
+
+    Set<Role> findByRole(Set<Role> role);
+
+    Role findByRole(String roles);
+
     List<Role> findAllBy();
 }

@@ -420,6 +420,15 @@
     </div>
     <script>
 
+
+        var optList = ["ALI", "VELI", "ELLI"];
+        /*        <option value='elem_1'>elem 1</option>
+                    <option value='elem_2'>elem 2</option>
+                    <option value='elem_3'>elem 3</option>
+                    <option value='elem_4'>elem 4</option>
+                    <option value='elem_100'>elem 100</option>
+        */
+
         var str = null;
         var currentPage;
         var currentList = [];
@@ -427,13 +436,12 @@
         var totalPage = null;
         var allEnvironments = null;
         var allRoles =null;
-        var selectedEnvironments = [];
-        var environmentSelectModalCurrentUser = null;
+        var selectedEnvironments = null;
+        var environmentSelectModalCurrentUser = [];
         var searchingValue =null;
         var selectedPage =null;
-
         var selectedRole=[];
-
+        var userSelectedAllEnvironments = [];
 
         function getPage(page, name) {
             console.log("getPage:" + page);
@@ -564,11 +572,10 @@
                     break;
                 }
             }
-            for(var i in selectedEnvironments) {
-                if (selectedEnvironments[i].id == environmentId) {
-                    environment = selectedEnvironments[i];
-                    if (!allEnvironments.includes(selectedEnvironments))
-                        allEnvironments.push(selectedEnvironments[i]);
+            for (var i in selectedEnvironments) {
+                var temp = selectedEnvironments[i];
+                if (temp.id == environmentId) {
+                    environment = temp;
                     break;
                 }
             }
@@ -584,49 +591,49 @@
                         newArray.push(tmp);
                     }
                 }
-
                 selectedEnvironments = newArray;
-
-
+                allEnvironments.push(environment);
             } else {
+
+                var tempAllEnvironments=allEnvironments.filter(function (e){
+                    return e!==environment;
+                })
+
+                allEnvironments=tempAllEnvironments;
                 selectedEnvironments.push(environment);
-            }
+
+                }
+
 
             renderEnvironmentModal();
         }
 
-        function renderEnvironmentModal(id) {
+        function renderEnvironmentModal(environmentSelectModalCurrentUser) {
             if (allEnvironments == null) {
                 return;
             }
-            if (id != null || selectedEnvironments != null ) {
-               var selectedEnvironmentsArray =[];
-                   selectedEnvironmentsArray.push(id);
-            }
-
             var allEnvironmentsDiv = document.getElementById("allEnvironments");
             var selectedEnvironmentsDiv = document.getElementById("selectedEnvironments");
-
             allEnvironmentsDiv.innerHTML = "";
             selectedEnvironmentsDiv.innerHTML = "";
-
+            var selectedEviromentsNumber;
             var temp = "";
-            for (var i in selectedEnvironmentsArray) {
-                selectedEnvironments = selectedEnvironmentsArray[i]
-                for (var j in selectedEnvironments) {
-                    var environment = selectedEnvironments[i];
+            if(selectedEnvironments ==null){
+                selectedEnvironments=0;
+            }
+
+            for (var i in selectedEnvironments) {
+                var environment = selectedEnvironments[i];
                     temp += "<div onclick='toggleModalEnvironmentSelection(" + environment.id + ")'>";
                     temp += environment.environmentName;
                     temp += "</div>";
                 }
-            }
-            selectedEnvironmentsDiv.innerHTML = temp;
 
+            selectedEnvironmentsDiv.innerHTML = temp;
             temp = "";
             for (var i in allEnvironments) {
                 var environment = allEnvironments[i];
                 var isThisAlreadySelected = false;
-
                 for (var k in selectedEnvironments) {
                     var tempSelected = selectedEnvironments[k];
                     if (tempSelected.id == environment.id) {
@@ -634,21 +641,17 @@
                         break;
                     }
                 }
-
                 if (isThisAlreadySelected) {
                     continue;
                 }
-
                 temp += "<div onclick='toggleModalEnvironmentSelection(" + environment.id + ")'>";
                 temp += environment.environmentName;
                 temp += "</div>";
             }
-
             allEnvironmentsDiv.innerHTML = temp;
-
         }
 
-        function getAllEnvironments(id) {
+        function getAllEnvironments() {
             $.ajax({
                 url: "http://localhost:8080/admin/enviromentAPI",
                 contentType: 'application/json',
@@ -659,7 +662,7 @@
                 success: function (data) {
                     var list = data.data;
                     allEnvironments = list;
-                    renderEnvironmentModal(id);
+                    renderEnvironmentModal();
                 },
                 error: function (data) {
                     console.log("Device control failed" + data);
@@ -688,11 +691,26 @@
         }
 
         function keyModal(id) {
+            var containUserEnvironmentBefore =null;
 
             for (var i in str.list) {
                 if (str.list[i].id == id) {
                     environmentSelectModalCurrentUser = str.list[i].environment;
                 }
+            }
+            for(i in allEnvironments){
+                if(allEnvironments.includes(environmentSelectModalCurrentUser[i]) ){
+                    containUserEnvironmentBefore=true;
+                }
+            }
+                for(i in selectedEnvironments){
+                    if( selectedEnvironments.includes(environmentSelectModalCurrentUser[i])){
+                        containUserEnvironmentBefore=true;
+                    }
+
+            }
+            if (environmentSelectModalCurrentUser != null && containUserEnvironmentBefore!=true){
+                selectedEnvironments = environmentSelectModalCurrentUser;
             }
 
             renderEnvironmentModal(environmentSelectModalCurrentUser);
@@ -900,6 +918,7 @@
             window.location.href = "http://localhost:8080/admin/system";
 
         }
+
 
     </script>
 </div>

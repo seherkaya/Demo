@@ -20,11 +20,8 @@ public interface UserRepository extends JpaRepository<User,Integer> {
 
      Page findAll(Pageable pageable);
 
-
      Page findAllByActive(int active,Pageable pageable);
-     Page findByUserName (String userName, Pageable pageable);
-
-
      /*@Query("select u from user u where u.user_name like %?1")*/
-     Page findByUserNameContaining (String userName,Pageable pageable);
+     /*Page findByUserNameContainingAAndActive (String userName,int active,Pageable pageable);*/
+     Page findByActiveAndUserNameIsContaining (int active,String userName,Pageable pageable);
 }

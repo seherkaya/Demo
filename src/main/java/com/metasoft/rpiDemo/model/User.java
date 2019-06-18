@@ -39,15 +39,15 @@ public class User {
     private Integer tc;
 
     @Column(name = "active")
-    private Integer active;
+    private int active;
 
     @ManyToMany(cascade = CascadeType.ALL)
     @JoinTable(name = "user_role", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "role_id"))
     private Set<Role> userRoles;
 
     @ManyToMany(cascade = CascadeType.ALL)
-    @JoinTable(name = "user_environment", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "environment_id"))
-    private Set<Environment> environment;
+    @JoinTable(name = "user_key", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "key_id"))
+    private Set<Key> key;
 
     public int getId() {
         return id;
@@ -94,17 +94,28 @@ public class User {
 
     public void setTc(Integer tc) { this.tc = tc; }
 
-    public Integer getActive() { return active; }
+    public int getActive() { return active; }
 
-    public void setActive(Integer active) { this.active = active; }
+    public void setActive(int active) { this.active = active; }
 
 
     public Set<Role> getRoles() { return userRoles; }
 
     public void setRoles(Set<Role> roles) { this.userRoles = roles; }
 
-    public Set<Environment> getEnvironment() { return environment; }
+    public Set<Role> getUserRoles() {
+        return userRoles;
+    }
 
-    public void setEnvironment(Set<Environment> environment) { this.environment = environment; }
+    public void setUserRoles(Set<Role> userRoles) {
+        this.userRoles = userRoles;
+    }
 
+    public Set<Key> getKey() {
+        return key;
+    }
+
+    public void setKey(Set<Key> key) {
+        this.key = key;
+    }
 }
