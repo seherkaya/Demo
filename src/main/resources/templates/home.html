@@ -161,6 +161,165 @@
         height: 8%;
         padding: 0px;
     }
+    .modals {
+        display: none;
+        position: absolute;
+        z-index: 1;
+        padding-top: 100px;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        overflow: hidden;
+        background-color: rgb(0,0,0);
+        background-color: rgba(0,0,0,0.4);
+    }
+    .modal-contents {
+        position: relative;
+        background-color: #fefefe;
+        margin: auto;
+        padding: 0;
+        border: 1px solid #888;
+        width:70%;
+        max-width: 400px;
+        box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2),0 6px 20px 0 rgba(0,0,0,0.19);
+        -webkit-animation-name: animatetop;
+        -webkit-animation-duration: 0.5s;
+        animation-name: animatetop;
+        animation-duration: 0.5s;
+        border-radius:5px;
+    }
+    .ok-close {
+        color: white;
+        font-size: 16px;
+        cursor: pointer;
+        width:100%;
+        border-radius:5px;
+        background-color: #5CB85C;
+        border:none;
+        padding:15px;
+    }
+    .modal-bodyx {
+        padding: 40px 15px 15px;
+        text-align:center;
+    }
+    .circle{
+        border-radius:50%;
+        background-color: #5CB85C;
+        width:100px;
+        height:100px;
+        position: relative;
+        margin: auto;
+        margin-bottom:-50px;
+        z-index: 1;
+        -webkit-animation-name: circleappear;
+        -webkit-animation-duration: 0.2s;
+        animation-name: circleappear;
+        animation-duration: 0.2s;
+        -webkit-animation-delay: 0.5s;
+        animation-delay: 0.5s;
+        opacity:0;
+    }
+    .opened{
+        opacity:1;
+    }
+    .fa-check{
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%, -50%);
+        -webkit-transform: translate(-50%, -50%);
+        color:white;
+        font-size: 38px;
+    }
+    .back{
+        -webkit-animation-name: backtop;
+        -webkit-animation-duration: 0.6s;
+        animation-name: backtop;
+        animation-duration: 0.6s;
+    }
+    .circleback{
+        -webkit-animation-name: circletop;
+        -webkit-animation-duration: 0.6s;
+        animation-name: circletop;
+        animation-duration: 0.6s;
+    }
+    .blurred{
+        filter: blur(2px);
+        -webkit-filter: blur(2px);
+    }
+    @-webkit-keyframes animatetop {
+        0% {
+            top:-300px;
+            opacity:0;
+        }
+        80%{
+            top:20px;
+            opacity:1;
+        }
+        100%{
+            top:0;
+        }
+    }
+    @keyframes animatetop {
+        0% {
+            top:-300px;
+            opacity:0;
+        }
+        80%{
+            top:20px;
+            opacity:1;
+        }
+        100%{
+            top:0;
+        }
+    }
+    @keyframes circleappear {
+        0% {
+            transform: scale(4);
+            opacity:0;
+        }
+        85%{
+            transform: scale(0.8);
+        }
+        100%{
+            transform: scale(1);
+            opacity:1;
+        }
+    }
+    @-webkit-keyframes circleappear {
+        0% {
+            transform: scale(4);
+            opacity:0;
+        }
+        85%{
+            transform: scale(0.8);
+        }
+        100%{
+            transform: scale(1);
+            opacity:1;
+        }
+    }
+    @keyframes backtop {
+        0% {
+            padding-top:100px;
+            opacity:1;
+        }
+        100%{
+            padding-top:0px;
+            opacity:0;
+        }
+    }
+    @-webkit-keyframes backtop {
+        0% {
+            padding-top:100px;
+            opacity:1;
+        }
+        100%{
+            padding-top:0px;
+            opacity:0;
+        }
+    }
 </style>
 <body>
 <div class="bodyDiv">
@@ -216,7 +375,7 @@
                     <div class="modal-content">
                         <div class="modal-header">
                             <h5 class="modal-title"><b>EDIT</b></h5>
-                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <button type="button" class="close"  aria-label="Close">
                                 <span aria-hidden="true">&times;</span>
                             </button>
                         </div>
@@ -258,7 +417,7 @@
                     <div class="modal-content" style="padding: 15px;height: 500px;">
                         <div class="modal-header">
                             <h5 class="modal-title"><b>KEY MANAGMENT</b></h5>
-                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <button type="button" class="close" onclick="closeEditingUserSave()" aria-label="Close">
                                 <span aria-hidden="true">&times;</span>
                             </button>
                         </div>
@@ -336,76 +495,31 @@
                     </div>
                 </div>
                 <div class="col-sm-2"></div>
-            </div>
-            <div id="forpopup">
-                <div id="popupDiv">
-                    <section id="fixed-form-container" class="popupCon">
-                        <div class="body">
-                            <div class="form-group">
-                                <label style="color:#9A9EA0">Kayıt Başarılı </label>
-                            </div>
-                        </div>
-                    </section>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="row" id="roleSetting" style="display: none">
-        <div class="col-sm-2"></div>
-        <div class="col-sm-8 centerDiv">
-            <h1>SEHER</h1>
-        </div>
-        <div class="col-sm-2"></div>
-    </div>
-    <div class="row" id="keySetting" style="display: none">
-        <div class="col-sm-12">
-            <div class="container">
-                <div class="col-sm-2"></div>
-                <div class="col-sm-8 centerDiv">
-                    <div class="main">
-                        <div class="form-group has-search">
-                            <span class="fa fa-search form-control-feedback"></span>
-                            <input type="text" class="form-control" placeholder="Search">
-                        </div>
 
+            </div>
+
+        </div>
+    </div>
+<!--    <div id="forpopup">
+        <div id="popupDiv">
+            <section id="fixed-form-container" class="popupCon">
+                <div id="Modalss" class="modals">
+                    <div class="circle" id="circle">
+                        <i class="fa fa-check" id="plus-fa"></i>
+                    </div>
+                    <div class="modal-contents">
+                        <div class="modal-bodyx">
+                            <h2>Success</h2>
+                            <p>Lorem ipsum dolor sit amet, at probatus maluisset theophrastus his, duo suas posidonium at.</p>
+                            <button class="ok-close">OK</button>
+                        </div>
                     </div>
                 </div>
-                <div class="col-sm-2"></div>
-            </div>
-            <div class="container">
-                <div class="col-sm-2"></div>
-                <div class="col-sm-8 centerDiv">
-                </div>
-                <div class="col-sm-2"></div>
-            </div>
         </div>
+            </section>
+        </div>-->
     </div>
-    <div class="row" id="systemSetting" style="display: none">
-        <div class="col-sm-2"></div>
-        <div class="col-sm-8 centerDiv">
-            <div class="sidenav">
-                <div class="content">
-                    <ul class="ca-menu">
-                        <li>
-                            <a href="#">
-                                <div class="ca-content">
-                                    <h2 style="font-size: medium; color:#9A9EA0" class="ca-main">SYSTEM RECOVERY MODE</h2>
-                                </div>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#">
-                                <div class="ca-content">
-                                    <h2 style="font-size: medium; color:#9A9EA0" class="ca-main"> SYSTEM SETTING MODE</h2>
-                                </div>
-                            </a>
-                        </li>
-                    </ul>
-                </div><!-- content -->
-            </div>
-        </div>
-        <div class="col-sm-2"></div>
-    </div>
+</div>
     <script>
 
 
@@ -423,18 +537,19 @@
         var pageLi = document.getElementById('pageNumber');
         var totalPage = null;
         var allKeys = null;
+        var allAvaibleKeys=null;
         var allRoles =null;
         var selectedKeys = null;
         var keySelectModalCurrentUser = [];
         var searchingValue =null;
         var selectedPage =null;
-        var selectedRole=[];Key
+        var selectedRole=[];
        // var userSelectedAllKeys = [];
 
         function getPage(page, name) {
             console.log("getPage:" + page);
             console.log("getPage:" + name);
-            var api = "http://localhost:8080/admin/listAPI?pageNo=" + page;
+            var api = "http://localhost:8080/admin/userlistAPI?pageNo=" + page;
             if (name != null) {
                 api += "&name=" + name;
             }
@@ -553,8 +668,8 @@
 
         function toggleModalKeySelection(keyId) {
             var key = null;
-            for (var i in allKeys) {
-                var temp = allKeys[i];
+            for (var i in allAvaibleKeys) {
+                var temp = allAvaibleKeys[i];
                 if (temp.id == keyId) {
                     key = temp;
                     break;
@@ -580,14 +695,14 @@
                     }
                 }
                 selectedKeys = newArray;
-                allKeys.push(key);
+                allAvaibleKeys.push(key);
             } else {
 
-                var tempAllKeys=allKeys.filter(function (e){
+                var tempAllKeys=allAvaibleKeys.filter(function (e){
                     return e!==key;
                 })
 
-                allKeys=tempAllKeys;
+                allAvaibleKeys=tempAllKeys;
                 selectedKeys.push(key);
 
                 }
@@ -596,8 +711,15 @@
             renderKeyModal();
         }
 
+        function closeEditingUserSave(){
+
+            getAllAvailableKeys();
+            renderKeyModal();
+            $('#keyModal').modal('toggle');
+        }
+
         function renderKeyModal(keySelectModalCurrentUser) {
-            if (allKeys == null) {
+            if (allAvaibleKeys == null) {
                 return;
             }
             var allKeysDiv = document.getElementById("allKeys");
@@ -618,8 +740,8 @@
 
             selectedKeysDiv.innerHTML = temp;
             temp = "";
-            for (var i in allKeys) {
-                var key = allKeys[i];
+            for (var i in allAvaibleKeys) {
+                var key = allAvaibleKeys[i];
                 var isThisAlreadySelected = false;
                 for (var k in selectedKeys) {
                     var tempSelected = selectedKeys[k];
@@ -638,9 +760,28 @@
             allKeysDiv.innerHTML = temp;
         }
 
+        function getAllAvailableKeys() {
+            $.ajax({
+                url: "http://localhost:8080/admin/availableKeyAPI",
+                contentType: 'application/json',
+                traditional: true,
+                dataType: 'json',
+                processData: false,
+                type: 'POST',
+                success: function (data) {
+                    var list = data.data;
+                    allAvaibleKeys = list;
+                    renderKeyModal();
+                },
+                error: function (data) {
+                    console.log("Device control failed" + data);
+                }
+            })
+        }
+
         function getAllKeys() {
             $.ajax({
-                url: "http://localhost:8080/admin/enviromentAPI",
+                url: "http://localhost:8080/admin/keysListAPI",
                 contentType: 'application/json',
                 traditional: true,
                 dataType: 'json',
@@ -659,7 +800,7 @@
 
         function getAllRoles() {
             $.ajax({
-                url: "http://localhost:8080/admin/rolesAPI",
+                url: "http://localhost:8080/admin/rolesListAPI",
                 contentType: 'application/json',
                 traditional: true,
                 dataType: 'json',
@@ -667,7 +808,7 @@
                 type: 'POST',
                 success: function (data) {
                     var list = data.data;
-                    allRoles = list;
+                    allAvaibleRoles = list;
                 },
                 error: function (data) {
                     console.log("Device control failed" + data);
@@ -685,8 +826,8 @@
                     keySelectModalCurrentUser = str.list[i].key;
                 }
             }
-            for(i in allKeys){
-                if(allKeys.includes(keySelectModalCurrentUser[i]) ){
+            for(i in allAvaibleKeys){
+                if(allAvaibleKeys.includes(keySelectModalCurrentUser[i]) ){
                     containUserKeyBefore=true;
                 }
             }
@@ -702,8 +843,8 @@
 
             renderKeyModal(keySelectModalCurrentUser);
 
-            if (allKeys == null) {
-                getAllKeys(id);
+            if (allAvaibleKeys == null) {
+                getAllAvailableKeys();
             }
 
             $("#keyModal").modal('show');
@@ -834,7 +975,7 @@
 
         function deleteUser(id) {
             $.ajax({
-                url: "http://localhost:8080/admin/deleteAPI",
+                url: "http://localhost:8080/admin/userDeleteAPI",
                 contentType: 'application/json',
                 traditional: true,
                 data: JSON.stringify(id),

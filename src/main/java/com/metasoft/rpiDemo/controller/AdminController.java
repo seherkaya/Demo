@@ -35,7 +35,8 @@ public class AdminController {
     @RequestMapping(value = "/userlistAPI", method = RequestMethod.POST)
     public String returnList(@RequestParam(required = false, value = "name") String name,
                               @RequestParam( required = true, value = "pageNo") Integer pageNo)
-    {if(pageNo== null){pageNo=0;}
+    {
+        if(pageNo== null){pageNo=0;}
         return new Gson().toJson( userServiceImpl.searchAll( name,pageNo ) );
     }
 
@@ -54,7 +55,7 @@ public class AdminController {
     }
     //Enroll environment to user
     @ResponseBody
-    @RequestMapping(value = "/enrollUserEnvironmentAPI", method = RequestMethod.POST)
+    @RequestMapping(value = "/enrollUserKeyAPI", method = RequestMethod.POST)
     public String returnEnrollUserEnvironment(@RequestParam (required =true,value = "user_id") int user_id ,
                                               @RequestBody KeyList environmentList){
 

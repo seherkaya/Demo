@@ -1,5 +1,6 @@
 package com.metasoft.rpiDemo.service;
 
+import com.google.gson.Gson;
 import com.metasoft.rpiDemo.model.*;
 import com.metasoft.rpiDemo.repository.KeyRepository;
 import com.metasoft.rpiDemo.repository.RoleRepository;
@@ -8,6 +9,8 @@ import com.metasoft.rpiDemo.system.SystemGeneral;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.security.authentication.AbstractAuthenticationToken;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
 import java.util.Arrays;
@@ -27,7 +30,27 @@ public class UserServiceImpl implements UserService {
     private KeyRepository keyRepository;
 
     @Override
+    public User me() {
+
+        boolean hidePassword=true ;
+        AbstractAuthenticationToken auth = (AbstractAuthenticationToken) SecurityContextHolder.getContext().getAuthentication();
+        if (auth.getPrincipal() instanceof User) {
+            User user = (User) auth.getPrincipal();
+            if (hidePassword) user.setUserPassword(null);
+            return user;
+        }
+        Gson gson = new Gson();
+        User _user = userRepository.findByUserEmail(auth.getName());
+        User clone = gson.fromJson(gson.toJson(_user), User.class);
+        if (hidePassword) clone.setUserPassword(null);
+//        user.setPassword(null);
+        return clone;
+    }
+
+    @Override
     public ApiResponse login(User user) throws Exception {
+
+        User WhoamI= me();
 
         ApiResponse response = new ApiResponse( );
 

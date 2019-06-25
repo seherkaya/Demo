@@ -106,7 +106,7 @@
 
                     <div style="margin: auto; max-width: 200px">
                         <label style="margin-top: 15px"><b>E-Mail</b></label>
-                        <input style="margin-top: 5px" type="email" class="form-control" id="email" value="seher@kaya.com"
+                        <input style="margin-top: 5px" type="email" class="form-control" for ="email" id="email" value="seher@kaya.com"
                                placeholder="E-Mail">
                     </div>
 
@@ -114,7 +114,7 @@
                         <label style="margin-top: 15px"><b>Password</b></label>
                         <div id="wrapper">
                             <div class="form-group has-feedback">
-                                <input type="password" class="form-control" id="password" placeholder="Password" value="123456">
+                                <input type="password" class="form-control" for="password" id="password" placeholder="Password" value="123456">
                                 <i class="glyphicon glyphicon-eye-open form-control-feedback"></i>
                             </div>
                         </div>
@@ -143,11 +143,14 @@
     $(document).ready(function () {
         $("#login").click(function () {
             var userLogin = {
-                "email": $("#email").val(),
-                "password": $("#password").val()
+                "userEmail": $("#email").val(),
+                "userPassword": $("#password").val()
             }
+            var header ={};
+            header ={ "Authorization": "Basic " + btoa(email.value + ":" + password.value)};
             $.ajax({
 
+                headers:header,
                 url: 'http://localhost:8080/loginAPI',
                 contentType: 'application/json',
                 data: JSON.stringify(userLogin),

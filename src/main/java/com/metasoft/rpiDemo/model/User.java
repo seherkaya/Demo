@@ -3,8 +3,11 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.springframework.security.core.GrantedAuthority;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Set;
 
 @Data
@@ -41,11 +44,11 @@ public class User {
     @Column(name = "active")
     private int active;
 
-    @ManyToMany(cascade = CascadeType.ALL)
+    @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinTable(name = "user_role", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "role_id"))
     private Set<Role> userRoles;
 
-    @ManyToMany(cascade = CascadeType.ALL)
+    @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinTable(name = "user_key", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "key_id"))
     private Set<Key> key;
 
@@ -117,5 +120,18 @@ public class User {
 
     public void setKey(Set<Key> key) {
         this.key = key;
+    }
+
+    public Collection<GrantedAuthority> getAuthorities() {
+        //make everyone ROLE_USER
+        Collection<GrantedAuthority> grantedAuthorities = new ArrayList<GrantedAuthority>();
+        GrantedAuthority grantedAuthority = new GrantedAuthority() {
+            //anonymous inner type
+            public String getAuthority() {
+                return userRoles.iterator().next().getRole();
+            }
+        };
+        grantedAuthorities.add(grantedAuthority);
+        return grantedAuthorities;
     }
 }

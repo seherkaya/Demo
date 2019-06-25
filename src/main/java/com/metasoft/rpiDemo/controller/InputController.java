@@ -24,4 +24,11 @@ public class InputController {
         return new Gson().toJson( userServiceImpl.login( user));
     }
 
+    @ResponseBody
+    @RequestMapping(value = "/me", method = RequestMethod.POST)
+    public String me() throws Exception {
+        return null;
+    }
+
+
 }
